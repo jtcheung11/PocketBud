@@ -12,23 +12,30 @@ class ExpenseController {
     
 static let shared = ExpenseController()
     var expenses: [Expense] = []
-    let publicDB = CKContainer.default().publicCloudDatabase
+    let privateDB = CKContainer.default().privateCloudDatabase
     
 //MARK - CRUD
     //Create
     func addExpense(business: String, category: String, amount: Double, date: Date = Date(), completion: @escaping(Bool) -> Void) {
-       // Do I need my reference to 'categoryTotalReference' here?
-//        let categoryTotalReference = CKRecord.Reference(record: , action: .none)
-        let newExpense = Expense(business: business, category: category, amount: amount, date: date)
+        var categoryTotalReference: CKRecord.Reference?
+        if let categoryTotal = CategoryTotalController.shared.categoryTotals.first(where: { $0.categoryName == category  }) {
+             categoryTotalReference = CKRecord.Reference(recordID: categoryTotal.recordID, action: .none)
+        } else {
+//            CategoryTotalController.shared.createCategoryTotal
+            let categoryTotal = CategoryTotal(categoryName: category, total: 0, budgetReference: nil, recordID: CKRecord.ID())
+             categoryTotalReference = CKRecord.Reference(recordID: categoryTotal.recordID, action: .none)
+        }
+        guard let categoryTotalReference = categoryTotalReference else { return completion(false) }
+        //recordID added to Expense.swift error popped up here. Did I do this right? Or do I need to add the param on line 19?
+        let newExpense = Expense(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: CKRecord.ID)
         let expenseRecord = CKRecord(expense: newExpense)
-        publicDB.save(expenseRecord) { (record, error) in
+        privateDB.save(expenseRecord) { (record, error) in
             if let error = error {
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 completion(false)
                 return
             }
             guard let record = record,
-                  //Does this work?
                     let savedExpense = Expense(ckRecord: record)
             else { return completion(false)}
             
@@ -40,18 +47,16 @@ static let shared = ExpenseController()
     
     
     //Retrieve/Fetch
-    func fetchExpense(completion: @escaping(Bool) -> Void) {
+    func fetchExpenses(completion: @escaping(Bool) -> Void) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: ExpenseStrings.recordTypeKey, predicate: predicate)
         var operation = CKQueryOperation(query: query)
         
         var fetchedExpenses: [Expense] = []
-        
-        //start here when returning
+    
         operation.recordMatchedBlock = { (_, result) in
             switch result {
             case .success(let record):
-                //what is ckRecord coming from? Extension on Expense Model?
                 guard let fetchedExpense = Expense(ckRecord: record)
                 else { return completion(false)}
                 fetchedExpenses.append(fetchedExpense)
@@ -71,7 +76,7 @@ static let shared = ExpenseController()
                     nextOperation.queryResultBlock = operation.queryResultBlock
                     nextOperation.recordMatchedBlock = operation.recordMatchedBlock
                     operation = nextOperation
-                    self.publicDB.add(nextOperation)
+                    self.privateDB.add(nextOperation)
                 } else {
                     return completion(true)
                 }
@@ -80,11 +85,15 @@ static let shared = ExpenseController()
                 return completion(false)
             }
         }
-        publicDB.add(operation)
+        privateDB.add(operation)
     }
     
     //Update
-    func updateExpense(_ expense: Expense, completion: @escaping(Bool)-> Void) {
+    func updateExpense(_ expense: Expense, category: String, amount: Double, business: String ,completion: @escaping(Bool)-> Void) {
+        //TODO: - Properties
+        expense.business = business
+        expense.amount = amount
+        expense.category = category
         let record = CKRecord(expense: expense)
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         operation.savePolicy = .changedKeys
@@ -99,7 +108,25 @@ static let shared = ExpenseController()
                 return completion(false)
             }
         }
-        publicDB.add(operation)
+        privateDB.add(operation)
+    }
+    
+    //delete
+    func deleteExpense(_ expense: Expense, completion: @escaping (Bool) -> Void ) {
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [expense.recordID])
+        
+        operation.savePolicy = .changedKeys
+        operation.qualityOfService = .userInteractive
+        operation.modifyRecordsResultBlock = { result in
+            switch result {
+            case .success():
+                return completion(true)
+            case .failure(let error):
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                return completion(false)
+            }
+        }
+        privateDB.add(operation)
     }
     
 }//End of class

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */; };
+		4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */; };
+		4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */; };
 		4AB5E2AF27D1687400C25342 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5E2AE27D1687400C25342 /* AppDelegate.swift */; };
 		4AB5E2B127D1687400C25342 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5E2B027D1687400C25342 /* SceneDelegate.swift */; };
 		4AB5E2B627D1687400C25342 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AB5E2B427D1687400C25342 /* Main.storyboard */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTableViewCell.swift; sourceTree = "<group>"; };
+		4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
+		4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTotalController.swift; sourceTree = "<group>"; };
 		4AB5E2AB27D1687400C25342 /* PocketBud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketBud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB5E2AE27D1687400C25342 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AB5E2B027D1687400C25342 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 		4AB5E2C527D168D600C25342 /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */,
 				4ABEE42D27D6B0F300A48BEA /* ExpenseController.swift */,
 			);
 			path = ModelControllers;
@@ -123,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				4ABEE42B27D68F0B00A48BEA /* AddExpenseViewController.swift */,
+				4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */,
 				4AB5E2C727D168F700C25342 /* CustomCellControllers */,
 			);
 			path = ViewControllers;
@@ -131,6 +139,7 @@
 		4AB5E2C727D168F700C25342 /* CustomCellControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */,
 			);
 			path = CustomCellControllers;
 			sourceTree = "<group>";
@@ -227,9 +236,12 @@
 			files = (
 				4ABEE42A27D68AEE00A48BEA /* CategoryTotal.swift in Sources */,
 				4ABEE42627D673F700A48BEA /* Expense.swift in Sources */,
+				4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */,
+				4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */,
 				4AB5E2AF27D1687400C25342 /* AppDelegate.swift in Sources */,
 				4AB5E2B127D1687400C25342 /* SceneDelegate.swift in Sources */,
 				4ABEE42427D673E800A48BEA /* Budget.swift in Sources */,
+				4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */,
 				4ABEE42227D673DA00A48BEA /* Category.swift in Sources */,
 				4ABEE42E27D6B0F300A48BEA /* ExpenseController.swift in Sources */,
 				4ABEE42C27D68F0B00A48BEA /* AddExpenseViewController.swift in Sources */,

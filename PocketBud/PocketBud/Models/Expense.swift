@@ -15,6 +15,7 @@ struct ExpenseStrings{
     static let amountKey = "amount"
     static let dateKey = "date"
     static let categoryTotalReferenceKey = "categoryTotalReference"
+    static let recordIDKey = "recordID"
 }
 
 class Expense {
@@ -24,14 +25,16 @@ class Expense {
     var amount: Double
     var date: Date
     var categoryTotalReference: CKRecord.Reference
+    var recordID : CKRecord.ID
     
-    init(business: String, category: String, amount: Double, date: Date, categoryTotalReference: CKRecord.Reference) {
+    init(business: String, category: String, amount: Double, date: Date, categoryTotalReference: CKRecord.Reference, recordID: CKRecord.ID) {
         
         self.business = business
         self.category = category
         self.amount = amount
         self.date = date
         self.categoryTotalReference = categoryTotalReference
+        self.recordID = recordID
     }
 }//End of class
 
@@ -40,12 +43,13 @@ extension Expense {
     guard let business = ckRecord[ExpenseStrings.businessKey] as? String,
           let category = ckRecord[ExpenseStrings.categoryKey] as? String,
           let amount = ckRecord[ExpenseStrings.amountKey] as? Double,
-          let date = ckRecord[ExpenseStrings.dateKey] as? Date
+          let date = ckRecord[ExpenseStrings.dateKey] as? Date,
+          let categoryTotalReference = ckRecord[ExpenseStrings.categoryTotalReferenceKey] as? CKRecord.Reference,
+          let recordID = ckRecord[ExpenseStrings.recordIDKey] as? CKRecord.ID
         else { return nil }
         
-          let categoryTotalReference = ckRecord[ExpenseStrings.categoryTotalReferenceKey] as? CKRecord.Reference
         //Unwrapping error
-        self.init(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference)
+        self.init(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: recordID)
     }
 }
 

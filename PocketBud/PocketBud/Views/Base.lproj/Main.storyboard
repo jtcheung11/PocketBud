@@ -295,10 +295,10 @@
             </objects>
             <point key="canvasLocation" x="832" y="972"/>
         </scene>
-        <!--View Controller-->
+        <!--Expense Detail View Controller-->
         <scene sceneID="lEN-Om-Zbf">
             <objects>
-                <viewController id="nPQ-Ia-2pI" sceneMemberID="viewController">
+                <viewController id="nPQ-Ia-2pI" customClass="ExpenseDetailViewController" customModule="PocketBud" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nh3-UB-qdq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +328,7 @@
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.15725811770000001" green="0.60885267939999999" blue="0.82168047359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="92" id="9ZM-C1-mFb">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="92" id="9ZM-C1-mFb" customClass="ExpenseDetailTableViewCell" customModule="PocketBud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ZM-C1-mFb" id="cdO-ft-ngJ">
@@ -341,13 +341,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-aW-8tV">
                                                             <rect key="frame" x="0.0" y="0.0" width="108.5" height="59.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(patron)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(patron)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="108.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(date/time created)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(date/time created)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
                                                                     <rect key="frame" x="0.0" y="35.5" width="108.5" height="24"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -377,6 +377,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.15725811770000001" green="0.60885267939999999" blue="0.82168047359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <segue destination="hwh-bb-M8f" kind="presentation" id="D8c-EL-1q2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -399,6 +402,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="u8K-li-KLw"/>
+                    <connections>
+                        <outlet property="currentDateLabel" destination="SwC-yQ-RF8" id="Cra-zK-u9J"/>
+                        <outlet property="totalExpensesLabel" destination="CTG-Om-Z1N" id="x1V-p2-73d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8FX-cg-TJr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -425,6 +432,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="T3s-s9-cxM"/>
+        <segue reference="8Lf-Pg-kRM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>
