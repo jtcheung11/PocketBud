@@ -21,13 +21,19 @@ static let shared = ExpenseController()
         if let categoryTotal = CategoryTotalController.shared.categoryTotals.first(where: { $0.categoryName == category  }) {
              categoryTotalReference = CKRecord.Reference(recordID: categoryTotal.recordID, action: .none)
         } else {
-//            CategoryTotalController.shared.createCategoryTotal
-            let categoryTotal = CategoryTotal(categoryName: category, total: 0, budgetReference: nil, recordID: CKRecord.ID())
-             categoryTotalReference = CKRecord.Reference(recordID: categoryTotal.recordID, action: .none)
+            CategoryTotalController.shared.createCategoryTotal(categoryName: category, total: amount) { result in
+                switch result {
+                case .success(let categoryTotal):
+                    categoryTotalReference = CKRecord.Reference(recordID: categoryTotal.recordID, action: .none)
+                    // JC - Dispatch Group?
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                    return completion(false)
+                }
+            }
         }
         guard let categoryTotalReference = categoryTotalReference else { return completion(false) }
-        //recordID added to Expense.swift error popped up here. Did I do this right? Or do I need to add the param on line 19?
-        let newExpense = Expense(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: CKRecord.ID)
+        let newExpense = Expense(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference)
         let expenseRecord = CKRecord(expense: newExpense)
         privateDB.save(expenseRecord) { (record, error) in
             if let error = error {
@@ -90,7 +96,7 @@ static let shared = ExpenseController()
     
     //Update
     func updateExpense(_ expense: Expense, category: String, amount: Double, business: String ,completion: @escaping(Bool)-> Void) {
-        //TODO: - Properties
+        
         expense.business = business
         expense.amount = amount
         expense.category = category

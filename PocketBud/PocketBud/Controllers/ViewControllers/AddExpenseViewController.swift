@@ -46,7 +46,7 @@ class AddExpenseViewController: UIViewController {
         } else{
             print("user input was NOT a number")
         }
-        
+        ExpenseDetailTableViewCell.createExpenseDetail(<#ExpenseDetailTableViewCell#>)
         self.dismiss(animated: true, completion: nil)
     }
     

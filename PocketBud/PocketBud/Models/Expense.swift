@@ -27,7 +27,7 @@ class Expense {
     var categoryTotalReference: CKRecord.Reference
     var recordID : CKRecord.ID
     
-    init(business: String, category: String, amount: Double, date: Date, categoryTotalReference: CKRecord.Reference, recordID: CKRecord.ID) {
+    init(business: String, category: String, amount: Double, date: Date, categoryTotalReference: CKRecord.Reference, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         
         self.business = business
         self.category = category
@@ -51,7 +51,7 @@ extension Expense {
         //Unwrapping error
         self.init(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: recordID)
     }
-}
+} // End of extension
 
 extension CKRecord{
     convenience init(expense: Expense) {
@@ -65,4 +65,4 @@ extension CKRecord{
             ExpenseStrings.categoryTotalReferenceKey : expense.categoryTotalReference
         ])
     }
-}
+} // End of extension
