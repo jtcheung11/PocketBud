@@ -16,7 +16,7 @@ class ExpenseDetailViewController: UIViewController {
     //MARK: - Properties
     var expense: Expense? {
         didSet{
-            self.updateView()
+            self.updateViews()
         }
     }
     
@@ -25,9 +25,11 @@ class ExpenseDetailViewController: UIViewController {
         
     }
     
-    func updateView() {
-//        totalExpensesLabel.text = 
+    func updateViews() {
+        
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        <#code#>
+    }
 }

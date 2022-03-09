@@ -10,7 +10,7 @@ import CloudKit
 
 class CategoryTotalController {
     
-   static let shared = CategoryTotalController()
+    static let shared = CategoryTotalController()
     
     var categoryTotals: [CategoryTotal] = []
     let privateDB = CKContainer.default().privateCloudDatabase
@@ -26,7 +26,7 @@ class CategoryTotalController {
         privateDB.save(categoryTotalRecord) { (record, error) in
             //Do I need error above? ^ if not what do I do below? just return compeltion?
             if let error = error {
-                return completion(.failure(.unableToSave))
+                return completion(.failure(.ckError(error)))
             }
             guard let record = record,
                   let savedCategoryTotal = CategoryTotal(ckRecord: record)
@@ -39,7 +39,9 @@ class CategoryTotalController {
         
     }
     
-    func updateCategoryTotal(_ categoryTotal: CategoryTotal, categoryName: String, total: Double, budgetReference: CKRecord.Reference, completion: @escaping(Bool) -> Void ) {
+    func updateCategoryTotal(_ categoryTotal: CategoryTotal, total: Double, completion: @escaping(Bool) -> Void ) {
+        categoryTotal.total += total
+        
         let record = CKRecord(categoryTotal: categoryTotal)
         ///Do I need 'recordIDsToDelete to actually delete if the updated category was the only expense in that category?
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
@@ -58,11 +60,96 @@ class CategoryTotalController {
         privateDB.add(operation)
     }
     
+    func updatCategoryTotalWithNewExpenseCategory(oldCategory: String, newCategory: String, amount: Double, completion: @escaping (Bool) -> Void) {
+        // Step 1 - get oldCategoryTotal
+        guard let oldCategoryTotal = categoryTotals.first(where: { $0.categoryName == oldCategory }) else { return completion(false) }
+        let group = DispatchGroup()
+        // Step 3 - subtract amount from oldCategoryTotal and update
+        group.enter()
+        updateCategoryTotal(oldCategoryTotal, total: -amount) { success in
+            if success {
+                group.leave()
+            } else {
+                return completion(false)
+            }
+        }
+        // Step 2 - get or create newCategoryTotal
+        // Step 4 - add amount to newCategoryTotal and update
+        group.enter()
+        if let newCategoryTotal = categoryTotals.first(where: { $0.categoryName == newCategory }) {
+            updateCategoryTotal(newCategoryTotal, total: amount) { success in
+                if success {
+                    group.leave()
+                } else {
+                    return completion(false)
+                }
+            }
+            
+        } else {
+            createCategoryTotal(categoryName: newCategory, total: amount) { result in
+                switch result {
+                case .success(_):
+                    group.leave()
+                case .failure(_):
+                    return completion(false)
+                }
+            }
+        }
+        // Step 5 - Dispatch Group
+        group.notify(queue: .main) {
+            return completion(true)
+        }
+    }
     
-    //Func 1: create an expense with a Category and attempt to create a new CategoryTotal. If that CategoryTotal already exists then fetch CategoryTotal and update it.
+    func updateCategoryTotalWithNewAmount(category: String, oldAmount: Double, newAmount: Double, completion: @escaping(Bool)-> Void) {
+        // Step 1 - get categoryTotal
+        guard let category = categoryTotals.first(where: { $0.categoryName == category }) else { return completion(false)}
+        // Step 2 - add or subtract amount from categoryTotal.total
+        let differenceAmount = newAmount - oldAmount
+        // Step 3 - update categoryTotal
+        updateCategoryTotal(category, total: differenceAmount) { success in
+            return completion(true)
+        }
+    }
     
-    //Func 2: When Amount is updated call this func to update the CategoryTotal by the changed amount
-    
-    //Func 3: When the Category is updated to a different or new CategoryTotal update the selected category>> CategoryTotal and create a new CategoryTotal if it does not exists.
+    func updateBothCategoryTotals(oldCategory: String, newCategory: String, oldAmount: Double, newAmount: Double, completion: @escaping(Bool) -> Void) {
+        // Step 1 - get oldCategoryTotal
+        // Step 3 - subtract oldAmount from oldCategoryTotal and update
+        guard let oldCategoryTotal = categoryTotals.first(where: { $0.categoryName == oldCategory }) else { return completion(false)}
+        let group = DispatchGroup()
+        group.enter()
+        updateCategoryTotal(oldCategoryTotal, total: -oldAmount) { success in
+            if success {
+                group.leave()
+            } else {
+                return completion(false)
+            }
+        }
+        // Step 2 - get or create newCategoryTotal
+        // Step 4 - add newAmount to newCategoryTotal and update
+        group.enter()
+        if let newCategoryTotal = categoryTotals.first(where: { $0.categoryName == newCategory }) {
+            updateCategoryTotal(newCategoryTotal, total: newAmount) { success in
+                if success {
+                    group.leave()
+                } else {
+                    return completion(false)
+                }
+            }
+        } else {
+            createCategoryTotal(categoryName: newCategory, total: newAmount) { success in
+                switch success {
+                case .success(_):
+                    group.leave()
+                case .failure(_):
+                    return completion(false)
+                }
+            }
+        }
+        // Step 5 - Dispath Group
+        group.notify(queue: .main) {
+            return completion(true)
+        }
+    }
     
 }//End of class

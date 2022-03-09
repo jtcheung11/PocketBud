@@ -15,7 +15,7 @@ class AddExpenseViewController: UIViewController {
     @IBOutlet weak var categoryTextField: UITextField!
     
     //MARK: - Properties
-    
+    var expense: Expense?
     let pickerView = UIPickerView()
     
     override func viewDidLoad() {
@@ -27,31 +27,40 @@ class AddExpenseViewController: UIViewController {
     func pickerViewInput() {
         pickerView.delegate = self
         pickerView.dataSource = self
-
+        
         categoryTextField.inputView = pickerView
         categoryTextField.textAlignment = .center
     }
-
-   
+    
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let businessName = businessNameTextField.text, !businessName.isEmpty,
               let amount = amountTextField.text, !amount.isEmpty,
               let category = categoryTextField.text, !category.isEmpty,
-                let amountAsDouble = Double(amountTextField.text!)
+              let amountAsDouble = Double(amount)
         else { return }
-            
-            
         
-        
-        if let amt = Double(amountTextField.text!) {
-            print("User input was a double")
-            print("Bussiness:\(businessName), Amount:\(amt), Category:\(category)")
-        } else{
-            print("user input was NOT a number")
-            // JC - Can this work?
-            ExpenseController.shared.addExpense(business: businessName, category: category, amount: amountAsDouble) { (_) in }
+        if let expense = expense {
+            ExpenseController.shared.updateExpense(expense, category: category, amount: amountAsDouble, business: businessName) { success in
+                if success {
+                    print("Expense Updated")
+                    self.dismiss(animated: true)
+                }
+            }
+        } else {
+            ExpenseController.shared.addExpense(business: businessName, category: category, amount: amountAsDouble) { success in
+                if success {
+                    self.dismiss(animated: true)
+                }
+            }
         }
-        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func updateView() {
+        guard let expense = expense else { return }
+        businessNameTextField.text = expense.business
+        categoryTextField.text = expense.category
+        amountTextField.text = String(expense.amount)
     }
     
     
@@ -59,7 +68,7 @@ class AddExpenseViewController: UIViewController {
 } //End of class
 
 extension AddExpenseViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-
+    
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -78,4 +87,4 @@ extension AddExpenseViewController: UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     
-}
+} // End of extension

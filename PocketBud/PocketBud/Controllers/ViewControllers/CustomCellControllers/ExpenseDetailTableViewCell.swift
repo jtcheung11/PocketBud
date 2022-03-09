@@ -9,17 +9,41 @@ import UIKit
 import CloudKit
 
 class ExpenseDetailTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var businessNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-//    static let shared = ExpenseDetailViewController()
-    //How do I get the date? (day month year)(time?)
-//    func createExpenseDetail(business: String, amount: Double, category: String, date: Date = Date())
-//        guard let business = business,
-//              let amount = amount,
-             
-//    }
+    var expense: Expense? {
+        didSet {
+            updateView()
+        }
+    }
     
-}
+    
+    func updateView(){
+        guard let expense = expense else { return }
+        businessNameLabel.text = expense.business
+        amountLabel.text = String(expense.amount)
+        //TODO: how to set date on dateLabel
+        
+        
+    
+        
+    }
+    
+    
+    
+} //End of class
+
+/*
+ func updateViews() {
+     guard let expense = expense else { return }
+     businessNameLabel.text = expense.title
+     if event.isComplete {
+         clockButton.setImage(UIImage(systemName: "clock"), for: .normal)
+     } else {
+         clockButton.setImage(UIImage(systemName: "clock.fill"), for: .normal)
+     }
+ }
+ */

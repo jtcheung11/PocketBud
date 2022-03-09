@@ -27,7 +27,7 @@ class Expense {
     var categoryTotalReference: CKRecord.Reference
     var recordID : CKRecord.ID
     
-    init(business: String, category: String, amount: Double, date: Date, categoryTotalReference: CKRecord.Reference, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
+    init(business: String, category: String, amount: Double, date: Date = Date(), categoryTotalReference: CKRecord.Reference, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString)) {
         
         self.business = business
         self.category = category
