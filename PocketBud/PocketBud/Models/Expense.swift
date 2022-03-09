@@ -48,7 +48,6 @@ extension Expense {
           let recordID = ckRecord[ExpenseStrings.recordIDKey] as? CKRecord.ID
         else { return nil }
         
-        //Unwrapping error
         self.init(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: recordID)
     }
 } // End of extension
@@ -62,7 +61,8 @@ extension CKRecord{
             ExpenseStrings.categoryKey : expense.category,
             ExpenseStrings.amountKey : expense.amount,
             ExpenseStrings.dateKey : expense.date,
-            ExpenseStrings.categoryTotalReferenceKey : expense.categoryTotalReference
+            ExpenseStrings.categoryTotalReferenceKey : expense.categoryTotalReference,
+            ExpenseStrings.recordIDKey : expense.recordID
         ])
     }
 } // End of extension

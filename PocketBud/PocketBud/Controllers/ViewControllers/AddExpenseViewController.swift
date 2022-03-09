@@ -35,18 +35,22 @@ class AddExpenseViewController: UIViewController {
    
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let businessName = businessNameTextField.text, !businessName.isEmpty,
-              //How do I make amountTextfield a Double
               let amount = amountTextField.text, !amount.isEmpty,
-              let category = categoryTextField.text, !category.isEmpty
+              let category = categoryTextField.text, !category.isEmpty,
+                let amountAsDouble = Double(amountTextField.text!)
         else { return }
+            
+            
+        
         
         if let amt = Double(amountTextField.text!) {
             print("User input was a double")
             print("Bussiness:\(businessName), Amount:\(amt), Category:\(category)")
         } else{
             print("user input was NOT a number")
+            // JC - Can this work?
+            ExpenseController.shared.addExpense(business: businessName, category: category, amount: amountAsDouble) { (_) in }
         }
-        ExpenseDetailTableViewCell.createExpenseDetail(<#ExpenseDetailTableViewCell#>)
         self.dismiss(animated: true, completion: nil)
     }
     
