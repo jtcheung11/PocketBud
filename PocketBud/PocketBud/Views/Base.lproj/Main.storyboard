@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Budget View Controller-->
         <scene sceneID="A9c-CB-Uja">
             <objects>
-                <viewController id="3TT-ko-2gy" customClass="MainViewController" customModule="PocketBud" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3TT-ko-2gy" customClass="BudgetViewController" customModule="PocketBud" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0YX-69-N7f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,8 +60,89 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qki-gy-6fz">
-                                <rect key="frame" x="0.0" y="285" width="414" height="135.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmZ-Y1-h9V">
+                                <rect key="frame" x="0.0" y="404.5" width="414" height="491.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="ots-iy-7tc">
+                                        <rect key="frame" x="44" y="24" width="326" height="36.5"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter this months income..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAA-uS-EK2">
+                                                <rect key="frame" x="0.0" y="0.0" width="168.5" height="36.5"/>
+                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="upm-oI-izg">
+                                                <rect key="frame" x="224.5" y="0.0" width="101.5" height="36.5"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="Update Income">
+                                                            <attributes>
+                                                                <font key="NSFont" size="14" name="Noteworthy-Light"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="updateIncomeButtonTapped:" destination="3TT-ko-2gy" eventType="touchUpInside" id="VMB-4f-khT"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pmg-Sy-rBl">
+                                        <rect key="frame" x="8" y="84.5" width="398" height="365"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Totals per Category" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8jG-Em-JXx">
+                                            <rect key="frame" x="0.0" y="0.0" width="398" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" textLabel="D1y-gt-liR" detailTextLabel="kEu-lJ-MEB" rowHeight="95" style="IBUITableViewCellStyleValue1" id="Q5l-dz-t5X">
+                                                <rect key="frame" x="0.0" y="88.5" width="398" height="95"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q5l-dz-t5X" id="4EL-24-P1d">
+                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="95"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="(Category)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D1y-gt-liR">
+                                                            <rect key="frame" x="20" y="32" width="90.5" height="32"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="($total)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kEu-lJ-MEB">
+                                                            <rect key="frame" x="324" y="32" width="54" height="32"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="20"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <segue destination="nPQ-Ia-2pI" kind="show" identifier="toExpenseDetailDV" id="6qv-oL-T4z"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="Pmg-Sy-rBl" firstAttribute="top" secondItem="ots-iy-7tc" secondAttribute="bottom" constant="24" id="4BH-7z-7Yx"/>
+                                    <constraint firstItem="ots-iy-7tc" firstAttribute="top" secondItem="jmZ-Y1-h9V" secondAttribute="top" constant="24" id="Qjq-hQ-cd0"/>
+                                    <constraint firstItem="Pmg-Sy-rBl" firstAttribute="leading" secondItem="jmZ-Y1-h9V" secondAttribute="leadingMargin" id="VaA-2N-D8s"/>
+                                    <constraint firstItem="ots-iy-7tc" firstAttribute="centerX" secondItem="jmZ-Y1-h9V" secondAttribute="centerX" id="WCw-TV-lXW"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Pmg-Sy-rBl" secondAttribute="bottom" id="kKw-La-tWV"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Pmg-Sy-rBl" secondAttribute="trailing" id="zoJ-4e-jsY"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qki-gy-6fz">
+                                <rect key="frame" x="0.0" y="284" width="414" height="135.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="82t-R8-paE">
                                         <rect key="frame" x="48" y="32" width="318" height="27.5"/>
@@ -95,66 +176,6 @@
                                     <constraint firstAttribute="bottom" secondItem="kwC-6P-KKc" secondAttribute="bottom" constant="40" id="a2c-ZU-7Gi"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmZ-Y1-h9V">
-                                <rect key="frame" x="0.0" y="404.5" width="414" height="491.5"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter this months income..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAA-uS-EK2">
-                                        <rect key="frame" x="32" y="36" width="350" height="34"/>
-                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Pmg-Sy-rBl">
-                                        <rect key="frame" x="8" y="86" width="398" height="363.5"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expenses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8jG-Em-JXx">
-                                            <rect key="frame" x="0.0" y="0.0" width="398" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" textLabel="D1y-gt-liR" detailTextLabel="kEu-lJ-MEB" rowHeight="95" style="IBUITableViewCellStyleValue1" id="Q5l-dz-t5X">
-                                                <rect key="frame" x="0.0" y="88.5" width="398" height="95"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q5l-dz-t5X" id="4EL-24-P1d">
-                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="95"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="(Category)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D1y-gt-liR">
-                                                            <rect key="frame" x="20" y="32" width="90.5" height="32"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="($total)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kEu-lJ-MEB">
-                                                            <rect key="frame" x="324" y="32" width="54" height="32"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="20"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <segue destination="nPQ-Ia-2pI" kind="show" id="6qv-oL-T4z"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="uAA-uS-EK2" secondAttribute="trailing" constant="32" id="6AE-sJ-lkK"/>
-                                    <constraint firstItem="uAA-uS-EK2" firstAttribute="leading" secondItem="jmZ-Y1-h9V" secondAttribute="leading" constant="32" id="7oY-7c-Eri"/>
-                                    <constraint firstItem="uAA-uS-EK2" firstAttribute="top" secondItem="jmZ-Y1-h9V" secondAttribute="top" constant="36" id="LbA-G9-reF"/>
-                                    <constraint firstItem="Pmg-Sy-rBl" firstAttribute="leading" secondItem="jmZ-Y1-h9V" secondAttribute="leadingMargin" id="VaA-2N-D8s"/>
-                                    <constraint firstItem="Pmg-Sy-rBl" firstAttribute="top" secondItem="uAA-uS-EK2" secondAttribute="bottom" constant="16" id="gaq-Li-VJk"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="Pmg-Sy-rBl" secondAttribute="bottom" id="kKw-La-tWV"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="Pmg-Sy-rBl" secondAttribute="trailing" id="zoJ-4e-jsY"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="eQt-vy-eWG"/>
                         <color key="backgroundColor" red="0.15725811767051037" green="0.6088526794322705" blue="0.82168047355883056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -186,6 +207,16 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="categoryTotalTBCell" destination="Q5l-dz-t5X" id="b2O-4G-1yr"/>
+                        <outlet property="currentTotalSpentLabel" destination="JGb-9f-JBS" id="p9L-kl-ak8"/>
+                        <outlet property="incomeAndCateogryTotalsView" destination="jmZ-Y1-h9V" id="y8C-Cy-WmO"/>
+                        <outlet property="incomeLabel" destination="Fqj-kr-sin" id="zo9-bH-uhR"/>
+                        <outlet property="incomeTextField" destination="uAA-uS-EK2" id="jTN-bu-q4S"/>
+                        <outlet property="monthLabel" destination="QbO-Q7-Taq" id="tDk-RQ-kF8"/>
+                        <outlet property="percentLabel" destination="JTk-SC-TOh" id="oXV-78-smU"/>
+                        <outlet property="progressBarView" destination="qki-gy-6fz" id="Mh0-cc-B6U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yw-NN-g7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -341,21 +372,26 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-aW-8tV">
                                                             <rect key="frame" x="0.0" y="0.0" width="108.5" height="59.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(patron)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="108.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(date/time created)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
                                                                     <rect key="frame" x="0.0" y="35.5" width="108.5" height="24"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="Xqc-mh-pqV" secondAttribute="bottom" id="CvZ-Z6-HUz"/>
+                                                                <constraint firstItem="Xqc-mh-pqV" firstAttribute="leading" secondItem="Pga-aW-8tV" secondAttribute="leading" id="eAt-aV-8fb"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Xqc-mh-pqV" secondAttribute="trailing" id="g6X-lo-zPC"/>
+                                                            </constraints>
                                                         </stackView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Amount)" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIq-Qc-QVy">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Amount)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIq-Qc-QVy">
                                                             <rect key="frame" x="188.5" y="13.5" width="129.5" height="32"/>
                                                             <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -381,7 +417,7 @@
                                             <outlet property="amountLabel" destination="hIq-Qc-QVy" id="mML-lf-jbf"/>
                                             <outlet property="businessNameLabel" destination="wgE-Wm-vpv" id="Vtp-ha-t0J"/>
                                             <outlet property="dateLabel" destination="Xqc-mh-pqV" id="2W1-Ff-5iH"/>
-                                            <segue destination="hwh-bb-M8f" kind="presentation" id="D8c-EL-1q2"/>
+                                            <segue destination="hwh-bb-M8f" kind="presentation" identifier="toAddExpenseVC" id="D8c-EL-1q2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -406,7 +442,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="u8K-li-KLw"/>
                     <connections>
+                        <outlet property="amountLabel" destination="hIq-Qc-QVy" id="Ch1-Jv-Pwc"/>
+                        <outlet property="businessNameLabel" destination="wgE-Wm-vpv" id="k3s-up-GqX"/>
                         <outlet property="currentDateLabel" destination="SwC-yQ-RF8" id="Cra-zK-u9J"/>
+                        <outlet property="tableView" destination="5g3-1I-OqV" id="k3B-14-EIX"/>
+                        <outlet property="timestampLabel" destination="Xqc-mh-pqV" id="Zsh-HF-9d1"/>
                         <outlet property="totalExpensesLabel" destination="CTG-Om-Z1N" id="x1V-p2-73d"/>
                     </connections>
                 </viewController>
@@ -434,8 +474,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="T3s-s9-cxM"/>
-        <segue reference="D8c-EL-1q2"/>
+        <segue reference="6qv-oL-T4z"/>
+        <segue reference="8Lf-Pg-kRM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>

@@ -10,58 +10,67 @@ import CloudKit
 
 class ExpenseController {
     
-static let shared = ExpenseController()
-    var expenses: [Expense] = []
+    static let shared = ExpenseController()
+    var expense: [Expense] = []
     let privateDB = CKContainer.default().privateCloudDatabase
     
-//MARK - CRUD
+    //MARK - CRUD
     //Create
     func addExpense(business: String, category: String, amount: Double, completion: @escaping(Bool) -> Void) {
         
+        var needsUpdated = false
         var categoryTotal: CategoryTotal?
         var categoryTotalReference: CKRecord.Reference?
         
+        let group = DispatchGroup()
+        
+        group.enter()
         if let currentCategoryTotal = CategoryTotalController.shared.categoryTotals.first(where: { $0.categoryName == category  }) {
             categoryTotal = currentCategoryTotal
-             categoryTotalReference = CKRecord.Reference(recordID: currentCategoryTotal.recordID, action: .none)
+            categoryTotalReference = CKRecord.Reference(recordID: currentCategoryTotal.recordID, action: .none)
+            needsUpdated = true
+            group.leave()
         } else {
             CategoryTotalController.shared.createCategoryTotal(categoryName: category, total: amount) { result in
                 switch result {
                 case .success(let newCategoryTotal):
                     categoryTotal = newCategoryTotal
                     categoryTotalReference = CKRecord.Reference(recordID: newCategoryTotal.recordID, action: .none)
-                    // JC - Dispatch Group?
+                    group.leave()
                 case .failure(let error):
                     print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                     return completion(false)
                 }
             }
         }
-        guard let categoryTotalReference = categoryTotalReference else { return completion(false) }
-        let newExpense = Expense(business: business, category: category, amount: amount, categoryTotalReference: categoryTotalReference)
-        let expenseRecord = CKRecord(expense: newExpense)
-        privateDB.save(expenseRecord) { (record, error) in
-            if let error = error {
-                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
-                completion(false)
-                return
+        group.notify(queue: .main) { [weak self] in
+            
+            guard let categoryTotalReference = categoryTotalReference else { return completion(false) }
+            let newExpense = Expense(business: business, category: category, amount: amount, categoryTotalReference: categoryTotalReference)
+            let expenseRecord = CKRecord(expense: newExpense)
+            self?.privateDB.save(expenseRecord) { (record, error) in
+                if let error = error {
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                    completion(false)
+                    return
+                }
+                guard let record = record,
+                      let savedExpense = Expense(ckRecord: record)
+                else { return completion(false)}
+                
+                print("Saved Expense Successfully")
+                self?.expense.insert(savedExpense, at: 0)
+                
+                guard let categoryTotal = categoryTotal else { return completion(false)}
+                
+                if needsUpdated {
+                    CategoryTotalController.shared.updateCategoryTotal(categoryTotal, total: amount, completion: completion)
+                } else {
+                    completion(true)
+                }
             }
-            guard let record = record,
-                    let savedExpense = Expense(ckRecord: record)
-            else { return completion(false)}
-            
-            print("Saved Expense Successfully")
-            self.expenses.insert(savedExpense, at: 0)
-            
-            guard let categoryTotal = categoryTotal else { return completion(false)}
-
-            
-            CategoryTotalController.shared.updateCategoryTotal(categoryTotal, total: amount, completion: completion)
-            
-//            completion(true)
         }
     }
-    
     
     //Retrieve/Fetch
     func fetchExpenses(completion: @escaping(Bool) -> Void) {
@@ -70,7 +79,7 @@ static let shared = ExpenseController()
         var operation = CKQueryOperation(query: query)
         
         var fetchedExpenses: [Expense] = []
-    
+        
         operation.recordMatchedBlock = { (_, result) in
             switch result {
             case .success(let record):
@@ -106,7 +115,18 @@ static let shared = ExpenseController()
     }
     
     //Update
-    func updateExpense(_ expense: Expense, category: String, amount: Double, business: String ,completion: @escaping(Bool)-> Void) {
+    func updateExpense(_ expense: Expense, category: String,  amount: Double, business: String ,completion: @escaping(Bool)-> Void) {
+        
+        var oldCategory: String?
+        var oldAmount: Double?
+        
+        if expense.category != category {
+            oldCategory = expense.category
+        }
+        
+        if expense.amount != amount {
+            oldAmount = expense.amount
+        }
         
         expense.business = business
         expense.amount = amount
@@ -119,7 +139,15 @@ static let shared = ExpenseController()
         operation.modifyRecordsResultBlock = { result in
             switch result {
             case .success():
-                return completion(true)
+                
+                if let oldCategory = oldCategory, let oldAmount = oldAmount {
+                    CategoryTotalController.shared.updateBothCategoryTotals(oldCategory: oldCategory, newCategory: category, oldAmount: oldAmount, newAmount: amount, completion: completion)
+                } else if let oldCategory = oldCategory {
+                    CategoryTotalController.shared.updatCategoryTotalWithNewExpenseCategory(oldCategory: oldCategory, newCategory: category, amount: amount, completion: completion)
+                } else if let oldAmount = oldAmount {
+                    CategoryTotalController.shared.updateCategoryTotalWithNewAmount(category: category, oldAmount: oldAmount, newAmount: amount, completion: completion)
+                }
+                
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 return completion(false)

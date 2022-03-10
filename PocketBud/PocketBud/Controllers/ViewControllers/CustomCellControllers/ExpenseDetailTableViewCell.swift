@@ -20,30 +20,30 @@ class ExpenseDetailTableViewCell: UITableViewCell {
         }
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let expenseToDelete = ExpenseController.shared.expense[indexPath.row]
+            guard let index = ExpenseController.shared.expense.firstIndex(of: expenseToDelete)
+            else { return }
+            
+            ExpenseController.shared.deleteExpense(expenseToDelete) { (success) in
+                if success {
+                    ExpenseController.shared.expense.remove(at: index)
+                    DispatchQueue.main.async {
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
+            }
+        }
+    }
     
     func updateView(){
         guard let expense = expense else { return }
         businessNameLabel.text = expense.business
         amountLabel.text = String(expense.amount)
         //TODO: how to set date on dateLabel
-        
-        
-    
-        
     }
     
-    
+
     
 } //End of class
-
-/*
- func updateViews() {
-     guard let expense = expense else { return }
-     businessNameLabel.text = expense.title
-     if event.isComplete {
-         clockButton.setImage(UIImage(systemName: "clock"), for: .normal)
-     } else {
-         clockButton.setImage(UIImage(systemName: "clock.fill"), for: .normal)
-     }
- }
- */

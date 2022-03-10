@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4090F427D995D400609563 /* BudgetViewController.swift */; };
 		4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */; };
 		4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */; };
 		4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */; };
@@ -24,9 +25,11 @@
 		4ABEE42C27D68F0B00A48BEA /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEE42B27D68F0B00A48BEA /* AddExpenseViewController.swift */; };
 		4ABEE42E27D6B0F300A48BEA /* ExpenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEE42D27D6B0F300A48BEA /* ExpenseController.swift */; };
 		4ABEE43227D6B67200A48BEA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABEE43127D6B67200A48BEA /* CloudKit.framework */; };
+		4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A4090F427D995D400609563 /* BudgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
 		4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTableViewCell.swift; sourceTree = "<group>"; };
 		4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
 		4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTotalController.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		4ABEE42D27D6B0F300A48BEA /* ExpenseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseController.swift; sourceTree = "<group>"; };
 		4ABEE42F27D6B66F00A48BEA /* PocketBud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PocketBud.entitlements; sourceTree = "<group>"; };
 		4ABEE43127D6B67200A48BEA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,7 @@
 			children = (
 				4ABEE42B27D68F0B00A48BEA /* AddExpenseViewController.swift */,
 				4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */,
+				4A4090F427D995D400609563 /* BudgetViewController.swift */,
 				4AB5E2C727D168F700C25342 /* CustomCellControllers */,
 			);
 			path = ViewControllers;
@@ -165,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				4ABC815C27D7ED5E00535631 /* NetworkError.swift */,
+				4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -249,6 +255,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ABEE42A27D68AEE00A48BEA /* CategoryTotal.swift in Sources */,
+				4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */,
+				4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */,
 				4ABEE42627D673F700A48BEA /* Expense.swift in Sources */,
 				4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */,
 				4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */,

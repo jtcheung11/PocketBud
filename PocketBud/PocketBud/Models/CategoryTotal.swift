@@ -9,6 +9,7 @@ import Foundation
 import CloudKit
 
 struct CategoryTotalStrings {
+    static let recordTypeKey = "CategoryTotal"
     static let categoryNameKey = "categoryName"
     static let totalKey = "total"
     static let budgetReferenceKey = "budgetReference"

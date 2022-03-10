@@ -24,7 +24,6 @@ class CategoryTotalController {
         let newCategoryTotal = CategoryTotal(categoryName: categoryName, total: total, budgetReference: budgetReference)
         let categoryTotalRecord = CKRecord(categoryTotal: newCategoryTotal)
         privateDB.save(categoryTotalRecord) { (record, error) in
-            //Do I need error above? ^ if not what do I do below? just return compeltion?
             if let error = error {
                 return completion(.failure(.ckError(error)))
             }
@@ -37,6 +36,45 @@ class CategoryTotalController {
             completion(.success(savedCategoryTotal))
         }
         
+    }
+    
+    func fetchCategoryTotals(completion: @escaping(Bool)-> Void) {
+        let predicat = NSPredicate(value: true)
+        let query = CKQuery(recordType: CategoryTotalStrings.recordTypeKey, predicate: predicat)
+        var operation = CKQueryOperation(query: query)
+        
+        var fetchedCategoryTotals: [CategoryTotal] = []
+        
+        operation.recordMatchedBlock = { (_, result) in
+            switch result {
+            case .success(let record):
+                guard let fetchedCategoryTotal = CategoryTotal(ckRecord: record)
+                else { return completion(false)}
+                fetchedCategoryTotals.append(fetchedCategoryTotal)
+            case .failure(let error):
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                completion(false)
+            }
+        }
+        operation.queryResultBlock = { result in
+            switch result {
+            case .success(let cursor):
+                
+                if let cursor = cursor {
+                    let nextOperation = CKQueryOperation(cursor: cursor)
+                    nextOperation.queryResultBlock = operation.queryResultBlock
+                    nextOperation.recordMatchedBlock = operation.recordMatchedBlock
+                    operation = nextOperation
+                    self.privateDB.add(nextOperation)
+                } else {
+                    return completion(true)
+                }
+            case .failure(let error):
+                print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                return completion(false)
+            }
+        }
+        privateDB.add(operation)
     }
     
     func updateCategoryTotal(_ categoryTotal: CategoryTotal, total: Double, completion: @escaping(Bool) -> Void ) {

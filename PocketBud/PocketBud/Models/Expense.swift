@@ -66,3 +66,9 @@ extension CKRecord{
         ])
     }
 } // End of extension
+
+extension Expense: Equatable {
+    static func == (lhs: Expense, rhs: Expense) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+}
