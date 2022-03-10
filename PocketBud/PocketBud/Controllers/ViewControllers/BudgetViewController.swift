@@ -11,7 +11,6 @@ class BudgetViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var incomeAndCateogryTotalsView: UIView!
-    @IBOutlet weak var categoryTotalTBCell: UITableViewCell!
     
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var currentTotalSpentLabel: UILabel!

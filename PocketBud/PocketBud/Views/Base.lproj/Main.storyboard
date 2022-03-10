@@ -202,13 +202,11 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zg9-L4-L8j">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="addButtonTapped:" destination="3TT-ko-2gy" id="ImK-gn-Hjj"/>
                                 <segue destination="hwh-bb-M8f" kind="presentation" identifier="toaddExpenseVC" id="8Lf-Pg-kRM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="categoryTotalTBCell" destination="Q5l-dz-t5X" id="b2O-4G-1yr"/>
                         <outlet property="currentTotalSpentLabel" destination="JGb-9f-JBS" id="p9L-kl-ak8"/>
                         <outlet property="incomeAndCateogryTotalsView" destination="jmZ-Y1-h9V" id="y8C-Cy-WmO"/>
                         <outlet property="incomeLabel" destination="Fqj-kr-sin" id="zo9-bH-uhR"/>
@@ -372,13 +370,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-aW-8tV">
                                                             <rect key="frame" x="0.0" y="0.0" width="108.5" height="59.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="108.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
                                                                     <rect key="frame" x="0.0" y="35.5" width="108.5" height="24"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -442,11 +440,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="u8K-li-KLw"/>
                     <connections>
-                        <outlet property="amountLabel" destination="hIq-Qc-QVy" id="Ch1-Jv-Pwc"/>
-                        <outlet property="businessNameLabel" destination="wgE-Wm-vpv" id="k3s-up-GqX"/>
                         <outlet property="currentDateLabel" destination="SwC-yQ-RF8" id="Cra-zK-u9J"/>
                         <outlet property="tableView" destination="5g3-1I-OqV" id="k3B-14-EIX"/>
-                        <outlet property="timestampLabel" destination="Xqc-mh-pqV" id="Zsh-HF-9d1"/>
                         <outlet property="totalExpensesLabel" destination="CTG-Om-Z1N" id="x1V-p2-73d"/>
                     </connections>
                 </viewController>
@@ -475,7 +470,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="6qv-oL-T4z"/>
-        <segue reference="8Lf-Pg-kRM"/>
+        <segue reference="D8c-EL-1q2"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>

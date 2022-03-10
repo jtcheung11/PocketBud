@@ -12,9 +12,7 @@ class ExpenseDetailViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var totalExpensesLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
-    @IBOutlet weak var businessNameLabel: UILabel!
-    @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
+    
     
     @IBOutlet weak var tableView: UITableView!
     

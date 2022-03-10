@@ -17,11 +17,12 @@ class CategoryTotalController {
     
     
     func createCategoryTotal(categoryName: String, total: Double, completion: @escaping (Result<CategoryTotal, NetworkError>) -> Void) {
-        guard let currentBudget = BudgetController.shared.currentBudget else { return completion(.failure(.foundNil)) }
+        let components = Calendar.current.dateComponents([.month , .year], from: Date())
         
-        let budgetReference = CKRecord.Reference(recordID: currentBudget.recordID, action: .none)
+       guard let month = components.month,
+             let year = components.year else { return completion(.failure(.foundNil)) }
         
-        let newCategoryTotal = CategoryTotal(categoryName: categoryName, total: total, budgetReference: budgetReference)
+        let newCategoryTotal = CategoryTotal(categoryName: categoryName, total: total, month: month, year: year)
         let categoryTotalRecord = CKRecord(categoryTotal: newCategoryTotal)
         privateDB.save(categoryTotalRecord) { (record, error) in
             if let error = error {
@@ -38,9 +39,17 @@ class CategoryTotalController {
         
     }
     
-    func fetchCategoryTotals(completion: @escaping(Bool)-> Void) {
-        let predicat = NSPredicate(value: true)
-        let query = CKQuery(recordType: CategoryTotalStrings.recordTypeKey, predicate: predicat)
+    func fetchCategoryTotals(date: Date, completion: @escaping(Bool)-> Void) {
+        let components = Calendar.current.dateComponents([.month , .year], from: date)
+        
+       guard let month = components.month,
+             let year = components.year else { return completion(false) }
+        
+        let monthPredicate = NSPredicate(format: "%K == %@", argumentArray: [CategoryTotalStrings.monthKey, month])
+        let yearPredicate = NSPredicate(format: "%K == %@", argumentArray: [CategoryTotalStrings.yearKey, year])
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [monthPredicate, yearPredicate])
+        
+        let query = CKQuery(recordType: CategoryTotalStrings.recordTypeKey, predicate: compoundPredicate)
         var operation = CKQueryOperation(query: query)
         
         var fetchedCategoryTotals: [CategoryTotal] = []
