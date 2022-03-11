@@ -33,6 +33,11 @@ class AddExpenseViewController: UIViewController {
     }
     
     
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
+    
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let businessName = businessNameTextField.text, !businessName.isEmpty,
               let amount = amountTextField.text, !amount.isEmpty,
@@ -43,14 +48,18 @@ class AddExpenseViewController: UIViewController {
         if let expense = expense {
             ExpenseController.shared.updateExpense(expense, category: category, amount: amountAsDouble, business: businessName) { success in
                 if success {
-                    print("Expense Updated")
-                    self.dismiss(animated: true)
+                    DispatchQueue.main.async {
+                        print("Expense Updated")
+                        self.dismiss(animated: true)
+                    }
                 }
             }
         } else {
             ExpenseController.shared.addExpense(business: businessName, category: category, amount: amountAsDouble) { success in
                 if success {
-                    self.dismiss(animated: true)
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true)
+                    }
                 }
             }
         }

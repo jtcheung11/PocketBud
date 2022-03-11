@@ -15,7 +15,6 @@ struct ExpenseStrings{
     static let amountKey = "amount"
     static let dateKey = "date"
     static let categoryTotalReferenceKey = "categoryTotalReference"
-    static let recordIDKey = "recordID"
 }
 
 class Expense {
@@ -44,11 +43,10 @@ extension Expense {
           let category = ckRecord[ExpenseStrings.categoryKey] as? String,
           let amount = ckRecord[ExpenseStrings.amountKey] as? Double,
           let date = ckRecord[ExpenseStrings.dateKey] as? Date,
-          let categoryTotalReference = ckRecord[ExpenseStrings.categoryTotalReferenceKey] as? CKRecord.Reference,
-          let recordID = ckRecord[ExpenseStrings.recordIDKey] as? CKRecord.ID
+          let categoryTotalReference = ckRecord[ExpenseStrings.categoryTotalReferenceKey] as? CKRecord.Reference
         else { return nil }
         
-        self.init(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: recordID)
+        self.init(business: business, category: category, amount: amount, date: date, categoryTotalReference: categoryTotalReference, recordID: ckRecord.recordID)
     }
 } // End of extension
 
@@ -62,7 +60,6 @@ extension CKRecord{
             ExpenseStrings.amountKey : expense.amount,
             ExpenseStrings.dateKey : expense.date,
             ExpenseStrings.categoryTotalReferenceKey : expense.categoryTotalReference,
-            ExpenseStrings.recordIDKey : expense.recordID
         ])
     }
 } // End of extension

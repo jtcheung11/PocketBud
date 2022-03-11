@@ -14,11 +14,13 @@ class ExpenseDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
+//    weak var delegate:
     var expense: Expense? {
         didSet {
-            updateView()
+            updateViews(with: expense)
         }
     }
+    
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -37,7 +39,7 @@ class ExpenseDetailTableViewCell: UITableViewCell {
         }
     }
     
-    func updateView(){
+    func updateViews(with expense: Expense?){
         guard let expense = expense else { return }
         businessNameLabel.text = expense.business
         amountLabel.text = String(expense.amount)

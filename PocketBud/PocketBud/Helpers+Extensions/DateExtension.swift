@@ -14,4 +14,11 @@ import Foundation
             formatter.timeStyle = .medium
             return formatter.string(from:self)
         }
+        
+        func dateAsMonth() -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMMM"
+            
+            return formatter.string(from: self)
+        }
     }

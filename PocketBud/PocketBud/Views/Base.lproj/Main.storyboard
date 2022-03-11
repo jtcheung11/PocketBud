@@ -38,6 +38,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" image="arrow.left.circle.fill" catalog="system">
                                                     <color key="baseForegroundColor" red="0.15725811770000001" green="0.60885267939999999" blue="0.82168047359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="leftArrowButtonTapped:" destination="3TT-ko-2gy" eventType="touchUpInside" id="dxu-gc-btM"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="($Current Spent)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGb-9f-JBS">
                                                 <rect key="frame" x="93" y="0.0" width="194.5" height="45"/>
@@ -55,6 +58,9 @@
                                                 <buttonConfiguration key="configuration" style="filled" image="arrow.right.circle.fill" catalog="system">
                                                     <color key="baseForegroundColor" red="0.15725811770000001" green="0.60885267939999999" blue="0.82168047359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="rightArrowButtonTapped:" destination="3TT-ko-2gy" eventType="touchUpInside" id="x3J-yy-LsJ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -213,12 +219,13 @@
                         <outlet property="incomeTextField" destination="uAA-uS-EK2" id="jTN-bu-q4S"/>
                         <outlet property="monthLabel" destination="QbO-Q7-Taq" id="tDk-RQ-kF8"/>
                         <outlet property="percentLabel" destination="JTk-SC-TOh" id="oXV-78-smU"/>
+                        <outlet property="progressBarBar" destination="qki-gy-6fz" id="ThW-fX-lKo"/>
                         <outlet property="progressBarView" destination="qki-gy-6fz" id="Mh0-cc-B6U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yw-NN-g7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="439.13043478260875" y="243.75"/>
+            <point key="canvasLocation" x="425" y="244"/>
         </scene>
         <!--Add Expense View Controller-->
         <scene sceneID="eod-Ci-yXm">
@@ -231,7 +238,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQX-22-eFC">
                                 <rect key="frame" x="150" y="740" width="114" height="28"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Save Expense"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Save Expense"/>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="hwh-bb-M8f" eventType="touchUpInside" id="ice-PI-Ij2"/>
                                 </connections>
@@ -301,6 +308,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0F-zh-dUd">
+                                <rect key="frame" x="32" y="32" width="40.5" height="32"/>
+                                <buttonConfiguration key="configuration" style="tinted"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="hwh-bb-M8f" eventType="touchUpInside" id="zXD-fL-Tu0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gka-C7-D7s"/>
                         <color key="backgroundColor" red="0.71824499019999999" green="0.91988920730000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -309,7 +323,9 @@
                             <constraint firstItem="VDt-cG-OZf" firstAttribute="top" secondItem="gka-C7-D7s" secondAttribute="top" constant="100" id="7OY-sA-T7i"/>
                             <constraint firstItem="AQX-22-eFC" firstAttribute="top" secondItem="VDt-cG-OZf" secondAttribute="bottom" constant="32" id="HjH-OL-g3z"/>
                             <constraint firstItem="VDt-cG-OZf" firstAttribute="centerY" secondItem="gka-C7-D7s" secondAttribute="centerY" id="Poa-nf-MlP"/>
+                            <constraint firstItem="h0F-zh-dUd" firstAttribute="top" secondItem="gka-C7-D7s" secondAttribute="top" constant="32" id="S8l-8T-g3m"/>
                             <constraint firstItem="VDt-cG-OZf" firstAttribute="leading" secondItem="gka-C7-D7s" secondAttribute="leading" constant="16" id="Xcc-de-t1a"/>
+                            <constraint firstItem="h0F-zh-dUd" firstAttribute="leading" secondItem="gka-C7-D7s" secondAttribute="leading" constant="32" id="l5K-CD-Po8"/>
                             <constraint firstItem="gka-C7-D7s" firstAttribute="trailing" secondItem="VDt-cG-OZf" secondAttribute="trailing" constant="16" id="mfv-YN-fqk"/>
                             <constraint firstItem="gka-C7-D7s" firstAttribute="bottom" secondItem="AQX-22-eFC" secondAttribute="bottom" constant="40" id="swz-CS-3Vg"/>
                         </constraints>
@@ -357,7 +373,7 @@
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="0.15725811770000001" green="0.60885267939999999" blue="0.82168047359999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="92" id="9ZM-C1-mFb" customClass="ExpenseDetailTableViewCell" customModule="PocketBud" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="expenseCell" rowHeight="92" id="9ZM-C1-mFb" customClass="ExpenseDetailTableViewCell" customModule="PocketBud" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9ZM-C1-mFb" id="cdO-ft-ngJ">
@@ -370,13 +386,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-aW-8tV">
                                                             <rect key="frame" x="0.0" y="0.0" width="108.5" height="59.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="108.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
                                                                     <rect key="frame" x="0.0" y="35.5" width="108.5" height="24"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -470,7 +486,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="6qv-oL-T4z"/>
-        <segue reference="D8c-EL-1q2"/>
+        <segue reference="8Lf-Pg-kRM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>

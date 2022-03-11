@@ -12,7 +12,7 @@ struct CategoryTotalStrings {
     static let recordTypeKey = "CategoryTotal"
     static let categoryNameKey = "categoryName"
     static let totalKey = "total"
-    static let recordIDKey = "recordID"
+    
     static let monthKey = "month"
     static let yearKey = "year"
 }
@@ -39,12 +39,11 @@ extension CategoryTotal {
     convenience init?(ckRecord: CKRecord) {
         guard let categoryName = ckRecord[CategoryTotalStrings.categoryNameKey] as? String,
         let total = ckRecord[CategoryTotalStrings.totalKey] as? Double,
-        let recordID = ckRecord[CategoryTotalStrings.recordIDKey] as? CKRecord.ID,
         let month = ckRecord[CategoryTotalStrings.monthKey] as? Int,
         let year = ckRecord[CategoryTotalStrings.yearKey] as? Int
         else { return nil }
         
-        self.init(categoryName: categoryName, total: total, recordID: recordID, month: month, year: year)
+        self.init(categoryName: categoryName, total: total, recordID: ckRecord.recordID, month: month, year: year)
     }
 } // End of extension
 
@@ -54,7 +53,6 @@ extension CKRecord {
         self.setValuesForKeys([
             CategoryTotalStrings.categoryNameKey : categoryTotal.categoryName,
             CategoryTotalStrings.totalKey : categoryTotal.total,
-            CategoryTotalStrings.recordIDKey : categoryTotal.recordID,
             CategoryTotalStrings.monthKey : categoryTotal.month,
             CategoryTotalStrings.yearKey : categoryTotal.year
         ])
