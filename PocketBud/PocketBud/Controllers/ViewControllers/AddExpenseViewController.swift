@@ -21,6 +21,7 @@ class AddExpenseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerViewInput()
+        updateView()
         
     }
     
@@ -63,6 +64,9 @@ class AddExpenseViewController: UIViewController {
                 }
             }
         }
+        NotificationCenter.default.post(name:
+                                            Notification.Name("RefreshNotificationIdentifier"),
+                                        object: nil)
     }
     
     func updateView() {

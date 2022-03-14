@@ -76,6 +76,7 @@ class CategoryTotalController {
                     operation = nextOperation
                     self.privateDB.add(nextOperation)
                 } else {
+                    self.categoryTotals = fetchedCategoryTotals
                     return completion(true)
                 }
             case .failure(let error):

@@ -78,14 +78,13 @@ class ExpenseController {
         let query = CKQuery(recordType: ExpenseStrings.recordTypeKey, predicate: predicate)
         var operation = CKQueryOperation(query: query)
         
-        var fetchedExpenses: [Expense] = []
-        
         operation.recordMatchedBlock = { (_, result) in
             switch result {
             case .success(let record):
                 guard let fetchedExpense = Expense(ckRecord: record)
                 else { return completion(false)}
-                fetchedExpenses.append(fetchedExpense)
+                self.expense.append(fetchedExpense)
+                
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 completion(false)
@@ -112,6 +111,11 @@ class ExpenseController {
             }
         }
         privateDB.add(operation)
+    }
+    
+    //Fetch Categories fileted by date/category selected
+    func fetchExpensesForSelectedCategory () {
+        
     }
     
     //Update

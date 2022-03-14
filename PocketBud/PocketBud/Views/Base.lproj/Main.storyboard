@@ -213,6 +213,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categoryTotalsTableView" destination="Pmg-Sy-rBl" id="4gP-tN-Jep"/>
                         <outlet property="currentTotalSpentLabel" destination="JGb-9f-JBS" id="p9L-kl-ak8"/>
                         <outlet property="incomeAndCateogryTotalsView" destination="jmZ-Y1-h9V" id="y8C-Cy-WmO"/>
                         <outlet property="incomeLabel" destination="Fqj-kr-sin" id="zo9-bH-uhR"/>
@@ -381,18 +382,18 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="2Fe-6v-J8T">
-                                                    <rect key="frame" x="48" y="16.5" width="318" height="59.5"/>
+                                                    <rect key="frame" x="48" y="0.5" width="318" height="91.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-aW-8tV">
-                                                            <rect key="frame" x="0.0" y="0.0" width="108.5" height="59.5"/>
+                                                            <rect key="frame" x="0.0" y="16" width="108.5" height="59.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="108.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
                                                                     <rect key="frame" x="0.0" y="35.5" width="108.5" height="24"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -406,7 +407,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Amount)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hIq-Qc-QVy">
-                                                            <rect key="frame" x="188.5" y="13.5" width="129.5" height="32"/>
+                                                            <rect key="frame" x="188.5" y="29.5" width="129.5" height="32"/>
                                                             <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="20"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -414,8 +415,12 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Pga-aW-8tV" firstAttribute="leading" secondItem="2Fe-6v-J8T" secondAttribute="leading" id="3v9-l6-rg5"/>
+                                                        <constraint firstItem="hIq-Qc-QVy" firstAttribute="leading" secondItem="Pga-aW-8tV" secondAttribute="trailing" constant="80" id="ARl-F7-KJB"/>
                                                         <constraint firstItem="hIq-Qc-QVy" firstAttribute="centerY" secondItem="2Fe-6v-J8T" secondAttribute="centerY" id="GrH-FI-xIG"/>
+                                                        <constraint firstItem="Pga-aW-8tV" firstAttribute="top" secondItem="2Fe-6v-J8T" secondAttribute="top" constant="16" id="L5f-Nn-bLp"/>
                                                         <constraint firstItem="Pga-aW-8tV" firstAttribute="centerY" secondItem="2Fe-6v-J8T" secondAttribute="centerY" id="R5j-cj-dZG"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Pga-aW-8tV" secondAttribute="bottom" constant="16" id="jtc-Nb-PHa"/>
+                                                        <constraint firstItem="Pga-aW-8tV" firstAttribute="leading" secondItem="2Fe-6v-J8T" secondAttribute="leading" id="sM3-1m-UiD"/>
                                                     </constraints>
                                                 </stackView>
                                             </subviews>

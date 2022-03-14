@@ -23,9 +23,13 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    var currentDate = Date()
+    
     //MARK: - LifyCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         viewCornersRounded()
         updateViews()
     }
@@ -39,10 +43,29 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath) as? ExpenseDetailTableViewCell else { return UITableViewCell()}
         
         let expense = ExpenseController.shared.expense[indexPath.row]
-        cell.businessNameLabel.text = String(expense.amount)
+        cell.businessNameLabel.text = String(expense.business)
         cell.amountLabel.text = String(expense.amount)
+        cell.dateLabel.text = currentDate.stringValue()
 //        How do I get the date in here from when the expense was created?
         return cell
+    }
+    
+    //Editing Style to delete
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let expenseToDelete = ExpenseController.shared.expense[indexPath.row]
+            guard let index = ExpenseController.shared.expense.firstIndex(of: expenseToDelete)
+            else { return }
+            
+            ExpenseController.shared.deleteExpense(expenseToDelete) { (success) in
+                if success {
+                    ExpenseController.shared.expense.remove(at: index)
+                    DispatchQueue.main.async {
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
+            }
+        }
     }
     
     //MARK: - Helper Methods
@@ -54,12 +77,16 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func updateViews() {
-
-//        totalExpensesLabel.text = String(expensesSummed())
+//        expensesSummed()
     }
     
     func expensesSummed() {
-    
+        tableView.reloadData()
+        currentDateLabel.text = currentDate.stringValue()
+            let total = ExpenseController.shared.expense.reduce(into: 0.0) { partialResult, expensesTotal in
+                partialResult += expensesTotal.amount
+            }
+        totalExpensesLabel.text = "$" + String(format: "%.2f", total)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,7 +94,7 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destination = segue.destination as? AddExpenseViewController else { return }
             let expense = ExpenseController.shared.expense[indexPath.row]
-            destination.expense = expense
+//            destination.expense =
         }
     }
 } //End of class

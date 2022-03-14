@@ -11,4 +11,8 @@ extension Double {
     func toDollarAmount () {
         
     }
+    
+    func toPercentSign (){
+        
+    }
 }
