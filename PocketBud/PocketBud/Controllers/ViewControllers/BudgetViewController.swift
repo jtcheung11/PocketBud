@@ -23,9 +23,10 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: - Properties
     
     var expensesFromCloudKit = [Expense]()
+    var currentIncome: Income?
     
-//    var categoryTotal = CategoryTotal
-      var budgetDate = Date()
+    //    var categoryTotal = CategoryTotal
+    var budgetDate = Date()
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,12 +35,13 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         categoryTotalsTableView.dataSource = self
         fetchCategoryTotals()
         viewCornersRounded()
-        fetchExpensesAndAssignToEmptyArray()
+        fetchExpensesVDL()
+        fetchIncomeVDL()
         updateViews()
         
         NotificationCenter.default.addObserver(self, selector:
-            #selector(self.refreshData(notification:)), name:
-            Notification.Name("RefreshNotificationIdentifier"), object: nil)
+                                                #selector(self.refreshData(notification:)), name:
+                                                Notification.Name("RefreshNotificationIdentifier"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +49,8 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //Is this redundant?
     @objc func refreshData(notification: Notification) {
-            self.updateViews()
-        }
+        self.updateViews()
+    }
     
     //MARK: - DataSource Methods
     
@@ -61,13 +63,13 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let categoryTotal = CategoryTotalController.shared.categoryTotals[indexPath.row]
         
         var config = cell.defaultContentConfiguration()
-
+        
         config.text = categoryTotal.categoryName
         let total = categoryTotal.total
         config.secondaryText = ConvertToDollar.shared.toDollar(value: total)
-
+        
         cell.contentConfiguration = config
-
+        
         return cell
     }
     
@@ -81,10 +83,18 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    func fetchExpensesAndAssignToEmptyArray() {
+    func fetchExpensesVDL() {
         ExpenseController.shared.fetchExpenses { success in
             if success {
                 print(ExpenseController.shared.expenses)
+            }
+        }
+    }
+    
+    func fetchIncomeVDL() {
+        IncomeController.shared.fetchIncome { success in
+            if success {
+                print("Successfully fetched Income")
             }
         }
     }
@@ -101,6 +111,35 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let incomeString = incomeTextField.text, !incomeString.isEmpty,
               let income = Double(incomeString)
         else { return }
+        if let currentIncome = IncomeController.shared.currentIncome{
+            let incomeComponents = Calendar.current.dateComponents([.month , .year], from: currentIncome.date)
+            let currentComponents = Calendar.current.dateComponents([.month , .year], from: Date())
+            guard let incomeMonth = incomeComponents.month,
+                  let incomeYear = incomeComponents.year,
+                  let currentMonth = currentComponents.month,
+                  let currentYear = currentComponents.year else { return }
+            
+            if incomeMonth == currentMonth && incomeYear == currentYear {
+                IncomeController.shared.updateIncome(currentIncome, newIncome: income) { success in
+                    if success {
+                        print("Successfully updated current Income to \(currentIncome)")
+                    }
+                }
+            } else {
+                IncomeController.shared.createIncome(income: income) { success in
+                    if success {
+                        print("Successfully created a new Income: \(income)")
+                    }
+                }
+            }
+        } else {
+            IncomeController.shared.createIncome(income: income) { success in
+                if success {
+                    print("Successfully created a new Income as \(income)")
+                }
+            }
+        }
+        
         incomeLabel.text = ConvertToDollar.shared.toDollar(value: income)
         print(income)
         incomeTextField.text = ""
@@ -129,7 +168,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     //MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toExpenseDetailDV" {
             guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
@@ -139,8 +178,8 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-
+    
 } //End of class
 
 
-    
+

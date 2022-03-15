@@ -11,7 +11,7 @@ import CloudKit
 struct incomeStrings {
     static let recordTypeKey = "Income"
     static let incomeKey = "income"
-    static let dateKey = "Date"
+    static let dateKey = "date"
 }
 
 class Income {
