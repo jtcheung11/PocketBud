@@ -51,6 +51,7 @@ class AddExpenseViewController: UIViewController {
                 if success {
                     DispatchQueue.main.async {
                         print("Expense Updated")
+                        NotificationCenter.default.post(name: Notification.Name("RefreshNotificationIdentifier"), object: nil)
                         self.dismiss(animated: true)
                     }
                 }
@@ -59,14 +60,13 @@ class AddExpenseViewController: UIViewController {
             ExpenseController.shared.addExpense(business: businessName, category: category, amount: amountAsDouble) { success in
                 if success {
                     DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: Notification.Name("RefreshNotificationIdentifier"), object: nil)
                         self.dismiss(animated: true)
                     }
                 }
             }
         }
-        NotificationCenter.default.post(name:
-                                            Notification.Name("RefreshNotificationIdentifier"),
-                                        object: nil)
+        
     }
     
     func updateView() {

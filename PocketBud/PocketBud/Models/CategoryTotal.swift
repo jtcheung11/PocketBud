@@ -59,3 +59,9 @@ extension CKRecord {
     }
 } // End of extension
 
+extension CategoryTotal: Equatable {
+    static func == (lhs: CategoryTotal, rhs: CategoryTotal) -> Bool {
+        return lhs.recordID == rhs.recordID
+    }
+}
+

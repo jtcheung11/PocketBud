@@ -21,4 +21,10 @@ import Foundation
             
             return formatter.string(from: self)
         }
+        
+        func monthDayYear () -> String {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            return formatter.string(from:self)
+        }
     }

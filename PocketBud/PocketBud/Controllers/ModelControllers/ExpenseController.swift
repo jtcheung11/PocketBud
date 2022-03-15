@@ -11,7 +11,7 @@ import CloudKit
 class ExpenseController {
     
     static let shared = ExpenseController()
-    var expense: [Expense] = []
+    var expenses: [Expense] = []
     let privateDB = CKContainer.default().privateCloudDatabase
     
     //MARK - CRUD
@@ -59,7 +59,7 @@ class ExpenseController {
                 else { return completion(false)}
                 
                 print("Saved Expense Successfully")
-                self?.expense.insert(savedExpense, at: 0)
+                self?.expenses.insert(savedExpense, at: 0)
                 
                 guard let categoryTotal = categoryTotal else { return completion(false)}
                 
@@ -83,7 +83,7 @@ class ExpenseController {
             case .success(let record):
                 guard let fetchedExpense = Expense(ckRecord: record)
                 else { return completion(false)}
-                self.expense.append(fetchedExpense)
+                self.expenses.append(fetchedExpense)
                 
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
@@ -160,6 +160,7 @@ class ExpenseController {
         privateDB.add(operation)
     }
     
+    
     //delete
     func deleteExpense(_ expense: Expense, completion: @escaping (Bool) -> Void ) {
         let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [expense.recordID])
@@ -169,7 +170,10 @@ class ExpenseController {
         operation.modifyRecordsResultBlock = { result in
             switch result {
             case .success():
-                return completion(true)
+                if let index = self.expenses.firstIndex(of: expense) {
+                    self.expenses.remove(at: index)
+                }
+                CategoryTotalController.shared.updateWhenExpenseDeleted(category: expense.category, total: expense.amount, completion: completion)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 return completion(false)

@@ -19,8 +19,8 @@ class CategoryTotalController {
     func createCategoryTotal(categoryName: String, total: Double, completion: @escaping (Result<CategoryTotal, NetworkError>) -> Void) {
         let components = Calendar.current.dateComponents([.month , .year], from: Date())
         
-       guard let month = components.month,
-             let year = components.year else { return completion(.failure(.foundNil)) }
+        guard let month = components.month,
+              let year = components.year else { return completion(.failure(.foundNil)) }
         
         let newCategoryTotal = CategoryTotal(categoryName: categoryName, total: total, month: month, year: year)
         let categoryTotalRecord = CKRecord(categoryTotal: newCategoryTotal)
@@ -42,8 +42,8 @@ class CategoryTotalController {
     func fetchCategoryTotals(date: Date, completion: @escaping(Bool)-> Void) {
         let components = Calendar.current.dateComponents([.month , .year], from: date)
         
-       guard let month = components.month,
-             let year = components.year else { return completion(false) }
+        guard let month = components.month,
+              let year = components.year else { return completion(false) }
         
         let monthPredicate = NSPredicate(format: "%K == %@", argumentArray: [CategoryTotalStrings.monthKey, month])
         let yearPredicate = NSPredicate(format: "%K == %@", argumentArray: [CategoryTotalStrings.yearKey, year])
@@ -91,7 +91,6 @@ class CategoryTotalController {
         categoryTotal.total += total
         
         let record = CKRecord(categoryTotal: categoryTotal)
-        ///Do I need 'recordIDsToDelete to actually delete if the updated category was the only expense in that category?
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
         operation.savePolicy = .changedKeys
         operation.qualityOfService = .userInteractive
@@ -200,4 +199,35 @@ class CategoryTotalController {
         }
     }
     
+    func updateWhenExpenseDeleted(category: String, total: Double, completion: @escaping(Bool) -> Void) {
+        // Step 1 - get categoryTotal
+        guard let categoryTotal = categoryTotals.first(where: { $0.categoryName == category }) else
+        { return completion(false) }
+        // Step 2a -if categoryTotal.amount  == amount { } if true delete categoryTotal
+        if categoryTotal.total == total {
+            deleteCategoryTotal(categoryTotal: categoryTotal, completion: completion)
+        } else {
+            updateCategoryTotal(categoryTotal, total: -total, completion: completion)
+            // Step 2b - else call update function with the -amount
+        }
+    }
+    
+    func deleteCategoryTotal(categoryTotal: CategoryTotal, completion: @escaping(Bool) -> Void) {
+        let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [categoryTotal.recordID])
+        
+        operation.savePolicy = .changedKeys
+        operation.qualityOfService = .userInteractive
+        operation.modifyRecordsResultBlock = { result in
+            switch result {
+            case .success():
+                if let index = self.categoryTotals.firstIndex(of: categoryTotal) {
+                    self.categoryTotals.remove(at: index)
+                }
+                return completion(true)
+            case .failure(_):
+                return completion(false)
+            }
+        }
+        privateDB.add(operation)
+    }
 }//End of class

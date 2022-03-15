@@ -53,7 +53,7 @@ extension Expense {
 extension CKRecord{
     convenience init(expense: Expense) {
         //Do I need a record ID here?
-        self.init(recordType: "Expense")
+        self.init(recordType: ExpenseStrings.recordTypeKey, recordID: expense.recordID)
         self.setValuesForKeys([
             ExpenseStrings.businessKey : expense.business,
             ExpenseStrings.categoryKey : expense.category,

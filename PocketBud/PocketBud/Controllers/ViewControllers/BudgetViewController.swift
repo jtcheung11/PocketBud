@@ -42,20 +42,13 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
             Notification.Name("RefreshNotificationIdentifier"), object: nil)
     }
     
-    func fetchExpensesAndAssignToEmptyArray() {
-        ExpenseController.shared.fetchExpenses { success in
-            if success {
-                print(ExpenseController.shared.expense)
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        updateViews()
     }
-    
+    //Is this redundant?
     @objc func refreshData(notification: Notification) {
-        //TODO: - Account for delay in saving/fetching data
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.updateViews()
         }
-    }
     
     //MARK: - DataSource Methods
     
@@ -70,7 +63,8 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var config = cell.defaultContentConfiguration()
 
         config.text = categoryTotal.categoryName
-        config.secondaryText = String(categoryTotal.total)
+        let total = categoryTotal.total
+        config.secondaryText = ConvertToDollar.shared.toDollar(value: total)
 
         cell.contentConfiguration = config
 
@@ -86,6 +80,15 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeAndCateogryTotalsView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
     }
     
+    
+    func fetchExpensesAndAssignToEmptyArray() {
+        ExpenseController.shared.fetchExpenses { success in
+            if success {
+                print(ExpenseController.shared.expenses)
+            }
+        }
+    }
+    
     @IBAction func leftArrowButtonTapped(_ sender: Any) {
         
     }
@@ -98,7 +101,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let incomeString = incomeTextField.text, !incomeString.isEmpty,
               let income = Double(incomeString)
         else { return }
-        incomeLabel.text = "$" + String(format: "%.2f", income)
+        incomeLabel.text = ConvertToDollar.shared.toDollar(value: income)
         print(income)
         incomeTextField.text = ""
     }
@@ -122,8 +125,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let total = CategoryTotalController.shared.categoryTotals.reduce(into: 0.0) { partialResult, categoryTotal in
             partialResult += categoryTotal.total
         }
-        currentTotalSpentLabel.text = "$" + String(format: "%.2f", total)
-        
+        currentTotalSpentLabel.text = ConvertToDollar.shared.toDollar(value: total)
     }
     
     //MARK: - Navigation
@@ -131,13 +133,9 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toExpenseDetailDV" {
             guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
-            //TODO: - Custom fetch call
             guard let indexPath = categoryTotalsTableView.indexPathForSelectedRow else { return }
             let categoryThatWasTapped = CategoryTotalController.shared.categoryTotals[indexPath.row]
-//            Fetch totalCategories as predicate and filter expenses based on the categoryTapped
-            /// destinationVC.expense = Expenses with category specified
-            destinationVC.expenses = ExpenseController.shared.expense
-            
+            destinationVC.categoryTotal = categoryThatWasTapped
         }
     }
     

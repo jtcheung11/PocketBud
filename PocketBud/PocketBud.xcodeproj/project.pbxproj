@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4A02994027DF79AE000D8356 /* UDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02993F27DF79AE000D8356 /* UDM.swift */; };
+		4A02994427DFC1FA000D8356 /* ConvertToDollarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */; };
+		4A02994627E0C20B000D8356 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994527E0C20B000D8356 /* Income.swift */; };
+		4A02994827E0C6D6000D8356 /* IncomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994727E0C6D5000D8356 /* IncomeController.swift */; };
 		4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4090F427D995D400609563 /* BudgetViewController.swift */; };
 		4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */; };
 		4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */; };
@@ -30,7 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4A02993F27DF79AE000D8356 /* UDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDM.swift; sourceTree = "<group>"; };
+		4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertToDollarHelper.swift; sourceTree = "<group>"; };
+		4A02994527E0C20B000D8356 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
+		4A02994727E0C6D5000D8356 /* IncomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeController.swift; sourceTree = "<group>"; };
 		4A4090F427D995D400609563 /* BudgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
 		4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTableViewCell.swift; sourceTree = "<group>"; };
 		4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 			children = (
 				4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */,
 				4ABEE42D27D6B0F300A48BEA /* ExpenseController.swift */,
+				4A02994727E0C6D5000D8356 /* IncomeController.swift */,
 			);
 			path = ModelControllers;
 			sourceTree = "<group>";
@@ -163,7 +168,7 @@
 				4ABEE42327D673E800A48BEA /* Budget.swift */,
 				4ABEE42527D673F700A48BEA /* Expense.swift */,
 				4ABEE42927D68AEE00A48BEA /* CategoryTotal.swift */,
-				4A02993F27DF79AE000D8356 /* UDM.swift */,
+				4A02994527E0C20B000D8356 /* Income.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				4ABC815C27D7ED5E00535631 /* NetworkError.swift */,
 				4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */,
 				4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */,
+				4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -257,7 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A02994627E0C20B000D8356 /* Income.swift in Sources */,
 				4AEA819227DBBBD9009AB69E /* DoubleExtension.swift in Sources */,
+				4A02994827E0C6D6000D8356 /* IncomeController.swift in Sources */,
 				4ABEE42A27D68AEE00A48BEA /* CategoryTotal.swift in Sources */,
 				4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */,
 				4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */,
@@ -265,9 +273,9 @@
 				4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */,
 				4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */,
 				4AB5E2AF27D1687400C25342 /* AppDelegate.swift in Sources */,
+				4A02994427DFC1FA000D8356 /* ConvertToDollarHelper.swift in Sources */,
 				4AB5E2B127D1687400C25342 /* SceneDelegate.swift in Sources */,
 				4ABEE42427D673E800A48BEA /* Budget.swift in Sources */,
-				4A02994027DF79AE000D8356 /* UDM.swift in Sources */,
 				4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */,
 				4ABEE42227D673DA00A48BEA /* Category.swift in Sources */,
 				4ABC815D27D7ED5E00535631 /* NetworkError.swift in Sources */,

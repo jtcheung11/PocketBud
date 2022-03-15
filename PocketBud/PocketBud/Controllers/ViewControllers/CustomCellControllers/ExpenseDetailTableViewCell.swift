@@ -14,19 +14,17 @@ class ExpenseDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-    let currentDate = Date()
-    
     var expense: Expense? {
         didSet {
-            updateViews(with: expense)
+            updateViews()
         }
     }
         
-    func updateViews(with expense: Expense?){
-//        guard let expense = expense else { return }
-//        businessNameLabel.text = expense.business
-//        amountLabel.text = String(expense.amount)
-//        dateLabel.text = currentDate.stringValue()
+    func updateViews() {
+        guard let expense = expense else { return }
+        businessNameLabel.text = expense.business
+        amountLabel.text = ConvertToDollar.shared.toDollar(value: expense.amount)
+        dateLabel.text = expense.date.stringValue()
     }
     
 
