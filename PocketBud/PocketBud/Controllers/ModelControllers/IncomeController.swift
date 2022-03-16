@@ -33,7 +33,7 @@ class IncomeController {
     
     func fetchIncome(completion: @escaping (Bool) -> Void) {
         let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: incomeStrings.incomeKey, predicate: predicate)
+        let query = CKQuery(recordType: incomeStrings.recordTypeKey, predicate: predicate)
         var operation = CKQueryOperation(query: query)
         
         var fetchedIncomes: [Income] = []
@@ -44,6 +44,7 @@ class IncomeController {
                 guard let fetchedIncome = Income(ckRecord: record)
                 else { return completion(false) }
                 fetchedIncomes.append(fetchedIncome)
+                print(fetchedIncome.income)
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 return completion(false)
@@ -70,6 +71,7 @@ class IncomeController {
             }
             
         }
+        privateDB.add(operation)
         
     }
     

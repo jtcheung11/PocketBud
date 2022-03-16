@@ -23,28 +23,22 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: - Properties
     
     var expensesFromCloudKit = [Expense]()
-    var currentIncome: Income?
+    //    var currentIncome: Income?
     
     //    var categoryTotal = CategoryTotal
     var budgetDate = Date()
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        incomeTextField.delegate = self
-        categoryTotalsTableView.delegate = self
-        categoryTotalsTableView.dataSource = self
+        setUpView()
         fetchCategoryTotals()
-        viewCornersRounded()
-        fetchExpensesVDL()
+//        fetchExpensesVDL()
         fetchIncomeVDL()
         updateViews()
-        
-        NotificationCenter.default.addObserver(self, selector:
-                                                #selector(self.refreshData(notification:)), name:
-                                                Notification.Name("RefreshNotificationIdentifier"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         updateViews()
     }
     //Is this redundant?
@@ -75,6 +69,16 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     //MARK: - Helper Methods
     
+    private func setUpView() {
+        incomeTextField.delegate = self
+        categoryTotalsTableView.delegate = self
+        categoryTotalsTableView.dataSource = self
+        viewCornersRounded()
+        NotificationCenter.default.addObserver(self, selector:
+                                                #selector(self.refreshData(notification:)), name:
+                                                Notification.Name("RefreshNotificationIdentifier"), object: nil)
+    }
+    
     private func viewCornersRounded() {
         progressBarView.layer.cornerRadius = 24
         progressBarView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
@@ -82,21 +86,33 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeAndCateogryTotalsView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
     }
     
-    
-    func fetchExpensesVDL() {
-        ExpenseController.shared.fetchExpenses { success in
-            if success {
-                print(ExpenseController.shared.expenses)
-            }
-        }
-    }
+   
     
     func fetchIncomeVDL() {
         IncomeController.shared.fetchIncome { success in
             if success {
-                print("Successfully fetched Income")
+                DispatchQueue.main.async {
+                    guard let currentIncome = IncomeController.shared.currentIncome
+                    else { return }
+                    self.incomeLabel.text = ConvertToDollar.shared.toDollar(value: currentIncome.income)
+                    self.percentCalcuated()
+                }
             }
         }
+    }
+    
+    func percentCalcuated() {
+        
+        guard let spent = currentTotalSpentLabel.text, !spent.isEmpty,
+              let income = incomeLabel.text, !income.isEmpty
+        else { return }
+
+        let currentSpent = Double(spent.dropFirst()) ?? 0
+        let currentIncome = Double(income.dropFirst()) ?? 1
+       
+        let percent = (currentSpent / currentIncome) * 100
+        //Make into percent
+        percentLabel.text = String(percent)
     }
     
     @IBAction func leftArrowButtonTapped(_ sender: Any) {
@@ -122,7 +138,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if incomeMonth == currentMonth && incomeYear == currentYear {
                 IncomeController.shared.updateIncome(currentIncome, newIncome: income) { success in
                     if success {
-                        print("Successfully updated current Income to \(currentIncome)")
+                        print("Successfully updated current Income to \(income)")
                     }
                 }
             } else {
@@ -143,6 +159,8 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeLabel.text = ConvertToDollar.shared.toDollar(value: income)
         print(income)
         incomeTextField.text = ""
+        
+        
     }
     
     func fetchCategoryTotals() {
@@ -150,6 +168,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
             DispatchQueue.main.async {
                 if success {
                     self?.updateViews()
+                    self?.percentCalcuated()
                     print("Successful in fetching all categoryTotals")
                 } else {
                     print("Failed to fetch all categoryTotals")
@@ -157,6 +176,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
     }
+    
     
     func updateViews(){
         categoryTotalsTableView.reloadData()

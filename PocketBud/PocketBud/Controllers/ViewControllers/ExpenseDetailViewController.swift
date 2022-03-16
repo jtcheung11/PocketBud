@@ -25,19 +25,20 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     //MARK: - LifyCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchExpensesVDL()
         tableView.delegate = self
         tableView.dataSource = self
         viewCornersRounded()
         updateViews()
         
         NotificationCenter.default.addObserver(self, selector:
-            #selector(self.refreshData(notification:)), name:
-            Notification.Name("RefreshNotificationIdentifier"), object: nil)
+                                                #selector(self.refreshData(notification:)), name:
+                                                Notification.Name("RefreshNotificationIdentifier"), object: nil)
     }
     
     @objc func refreshData(notification: Notification) {
-            self.updateViews()
-        }
+        self.updateViews()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         updateViews()
@@ -53,7 +54,7 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         let expense = expenses[indexPath.row]
         cell.expense = expense
-
+        
         return cell
     }
     
@@ -94,6 +95,7 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         currentDateLabel.text = currentDate.monthDayYear()
         
+        
         if let categoryTotal = categoryTotal {
             let total = categoryTotal.total
             totalExpensesLabel.text = ConvertToDollar.shared.toDollar(value: total)
@@ -111,7 +113,6 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func expensesSummed() {
-//        tableView.reloadData()
         self.updateViews()
         currentDateLabel.text = currentDate.stringValue()
         let total = ExpenseController.shared.expenses.reduce(into: 0.0) { partialResult, expensesTotal in
@@ -125,7 +126,20 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destination = segue.destination as? AddExpenseViewController else { return }
             let expenseThatWasTapped = expenses[indexPath.row]
-                        destination.expense = expenseThatWasTapped
+            destination.expense = expenseThatWasTapped
+        }
+    }
+    
+    func fetchExpensesVDL() {
+        if ExpenseController.shared.expenses.isEmpty{
+            ExpenseController.shared.fetchExpenses { success in
+                if success {
+                    DispatchQueue.main.async {
+                        self.updateViews()
+                        print(ExpenseController.shared.expenses)
+                    }
+                }
+            }
         }
     }
 } //End of class

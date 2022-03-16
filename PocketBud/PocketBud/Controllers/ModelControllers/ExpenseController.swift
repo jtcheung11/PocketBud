@@ -77,6 +77,7 @@ class ExpenseController {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: ExpenseStrings.recordTypeKey, predicate: predicate)
         var operation = CKQueryOperation(query: query)
+        expenses = []
         
         operation.recordMatchedBlock = { (_, result) in
             switch result {
