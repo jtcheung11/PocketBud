@@ -18,21 +18,17 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var incomeTextField: UITextField!
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
-    @IBOutlet weak var progressBarBar: UIView!
+    @IBOutlet weak var percentBarProgressView: UIProgressView!
     
     //MARK: - Properties
-    
     var expensesFromCloudKit = [Expense]()
-    //    var currentIncome: Income?
-    
-    //    var categoryTotal = CategoryTotal
     var budgetDate = Date()
+    
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
         fetchCategoryTotals()
-//        fetchExpensesVDL()
         fetchIncomeVDL()
         updateViews()
     }
@@ -41,13 +37,12 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(true)
         updateViews()
     }
-    //Is this redundant?
+    
     @objc func refreshData(notification: Notification) {
         self.updateViews()
     }
     
     //MARK: - DataSource Methods
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CategoryTotalController.shared.categoryTotals.count
     }
@@ -68,7 +63,6 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     //MARK: - Helper Methods
-    
     private func setUpView() {
         incomeTextField.delegate = self
         categoryTotalsTableView.delegate = self
@@ -85,8 +79,6 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeAndCateogryTotalsView.layer.cornerRadius = 24
         incomeAndCateogryTotalsView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
     }
-    
-   
     
     func fetchIncomeVDL() {
         IncomeController.shared.fetchIncome { success in
@@ -109,18 +101,27 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         let currentSpent = Double(spent.dropFirst()) ?? 0
         let currentIncome = Double(income.dropFirst()) ?? 1
-       
+    
         let percent = (currentSpent / currentIncome) * 100
-        //Make into percent
-        percentLabel.text = String(percent)
+        let percentWithSymbol = String(format: "%.1f",percent) + "%"
+        percentLabel.text = String(percentWithSymbol)
+        percentBarProgressView.progress = Float(currentSpent / currentIncome)
     }
     
     @IBAction func leftArrowButtonTapped(_ sender: Any) {
-        
+        //Step - 1: Get the current date
+        //Step - 2: Math to get month -1
+        budgetDate = Calendar.current.date(byAdding: .month, value: -1, to: budgetDate) ?? Date()
+        //Step - 3: Fetch categoryTotals from that calculated month
+        fetchCategoryTotals()
+        //Step - 4: Handle Expenses
+        ExpenseController.shared.expenses = []
     }
     
     @IBAction func rightArrowButtonTapped(_ sender: Any) {
-        
+        budgetDate = Calendar.current.date(byAdding: .month, value: 1, to: budgetDate) ?? Date()
+        fetchCategoryTotals()
+        ExpenseController.shared.expenses = []
     }
     
     @IBAction func updateIncomeButtonTapped(_ sender: UIButton) {
@@ -159,12 +160,10 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeLabel.text = ConvertToDollar.shared.toDollar(value: income)
         print(income)
         incomeTextField.text = ""
-        
-        
     }
     
     func fetchCategoryTotals() {
-        CategoryTotalController.shared.fetchCategoryTotals(date: Date()) { [weak self] success in
+        CategoryTotalController.shared.fetchCategoryTotals(date: budgetDate) { [weak self] success in
             DispatchQueue.main.async {
                 if success {
                     self?.updateViews()
@@ -178,28 +177,25 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    func updateViews(){
+    func updateViews() {
         categoryTotalsTableView.reloadData()
         monthLabel.text = budgetDate.dateAsMonth()
         let total = CategoryTotalController.shared.categoryTotals.reduce(into: 0.0) { partialResult, categoryTotal in
             partialResult += categoryTotal.total
         }
         currentTotalSpentLabel.text = ConvertToDollar.shared.toDollar(value: total)
+        percentCalcuated()
     }
     
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
         if segue.identifier == "toExpenseDetailDV" {
-            guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
             guard let indexPath = categoryTotalsTableView.indexPathForSelectedRow else { return }
             let categoryThatWasTapped = CategoryTotalController.shared.categoryTotals[indexPath.row]
             destinationVC.categoryTotal = categoryThatWasTapped
         }
+        destinationVC.currentDate = budgetDate
     }
-    
-    
 } //End of class
-
-
-

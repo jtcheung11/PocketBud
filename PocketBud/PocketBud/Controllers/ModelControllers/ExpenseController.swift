@@ -73,9 +73,19 @@ class ExpenseController {
     }
     
     //Retrieve/Fetch
-    func fetchExpenses(completion: @escaping(Bool) -> Void) {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: ExpenseStrings.recordTypeKey, predicate: predicate)
+    func fetchExpenses(for date: Date, completion: @escaping(Bool) -> Void) {
+        
+        let date = Calendar.current.date(byAdding: .month, value: -1, to: date) ?? Date()
+        let startDate = Calendar.current.date(bySetting: .day, value: 1, of: date) ?? Date()
+        let start = Calendar.current.startOfDay(for: startDate)
+        
+        let end = Calendar.current.date(byAdding: .month, value: 1, to: start) ?? Date()
+        
+        let predicate1 = NSPredicate(format: "%K >= %@", argumentArray: [ExpenseStrings.dateKey, start])
+        let predicate2 = NSPredicate(format: "%K < %@", argumentArray: [ExpenseStrings.dateKey, end])
+        
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        let query = CKQuery(recordType: ExpenseStrings.recordTypeKey, predicate: compoundPredicate)
         var operation = CKQueryOperation(query: query)
         expenses = []
         

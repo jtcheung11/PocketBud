@@ -13,27 +13,24 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     //MARK: - Outlets
     @IBOutlet weak var totalExpensesLabel: UILabel!
     @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var selectedCategoryLabel: UILabel!
+    @IBOutlet weak var forCategoryLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Properties
     var expenses: [Expense] = []
     var categoryTotal: CategoryTotal?
-    
     var currentDate = Date()
+//    var budgetDate: Date?
+    
     
     //MARK: - LifyCycles
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchExpensesVDL()
-        tableView.delegate = self
-        tableView.dataSource = self
-        viewCornersRounded()
+        setUpView()
         updateViews()
-        
-        NotificationCenter.default.addObserver(self, selector:
-                                                #selector(self.refreshData(notification:)), name:
-                                                Notification.Name("RefreshNotificationIdentifier"), object: nil)
     }
     
     @objc func refreshData(notification: Notification) {
@@ -85,6 +82,16 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     //MARK: - Helper Methods
+    
+    private func setUpView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        viewCornersRounded()
+        NotificationCenter.default.addObserver(self, selector:
+                                                #selector(self.refreshData(notification:)), name:
+                                                Notification.Name("RefreshNotificationIdentifier"), object: nil)
+    }
+    
     private func viewCornersRounded() {
         tableView.layer.cornerRadius = 24
         tableView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
@@ -99,8 +106,8 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
         if let categoryTotal = categoryTotal {
             let total = categoryTotal.total
             totalExpensesLabel.text = ConvertToDollar.shared.toDollar(value: total)
-            
             expenses = ExpenseController.shared.expenses.filter({ $0.category == categoryTotal.categoryName })
+            selectedCategoryLabel.text = categoryTotal.categoryName
             tableView.reloadData()
         } else {
             let total = CategoryTotalController.shared.categoryTotals.reduce(into: 0.0) { partialResult, categoryTotal in
@@ -108,6 +115,8 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
             }
             totalExpensesLabel.text = ConvertToDollar.shared.toDollar(value: total)
             expenses = ExpenseController.shared.expenses
+            selectedCategoryLabel.isHidden = true
+            forCategoryLabel.isHidden = true
             tableView.reloadData()
         }
     }
@@ -132,7 +141,7 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     func fetchExpensesVDL() {
         if ExpenseController.shared.expenses.isEmpty{
-            ExpenseController.shared.fetchExpenses { success in
+            ExpenseController.shared.fetchExpenses(for: currentDate) { success in
                 if success {
                     DispatchQueue.main.async {
                         self.updateViews()

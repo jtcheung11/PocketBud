@@ -17,5 +17,6 @@ enum Category: String, CaseIterable {
     case saving = "Saving"
     case investing = "Investing"
     case personal = "Personal"
+    case donations = "Donations"
     case other = "Other"
 }
