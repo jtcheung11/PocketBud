@@ -109,12 +109,8 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func leftArrowButtonTapped(_ sender: Any) {
-        //Step - 1: Get the current date
-        //Step - 2: Math to get month -1
         budgetDate = Calendar.current.date(byAdding: .month, value: -1, to: budgetDate) ?? Date()
-        //Step - 3: Fetch categoryTotals from that calculated month
         fetchCategoryTotals()
-        //Step - 4: Handle Expenses
         ExpenseController.shared.expenses = []
     }
     
@@ -160,6 +156,16 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeLabel.text = ConvertToDollar.shared.toDollar(value: income)
         print(income)
         incomeTextField.text = ""
+        percentCalcuated()
+    }
+
+    @IBAction func toCurrentMonthButtonTapped(_ sender: UIButton) {
+        if budgetDate != Date() {
+            budgetDate = Date()
+            fetchCategoryTotals()
+            ExpenseController.shared.expenses = []
+            updateViews()
+        }
     }
     
     func fetchCategoryTotals() {

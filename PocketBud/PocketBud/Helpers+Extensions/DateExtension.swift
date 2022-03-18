@@ -24,7 +24,8 @@ import Foundation
         
         func monthDayYear () -> String {
             let formatter = DateFormatter()
-            formatter.dateStyle = .medium
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
             return formatter.string(from:self)
         }
     }

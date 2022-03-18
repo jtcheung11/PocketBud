@@ -24,7 +24,7 @@ class ExpenseDetailTableViewCell: UITableViewCell {
         guard let expense = expense else { return }
         businessNameLabel.text = expense.business
         amountLabel.text = ConvertToDollar.shared.toDollar(value: expense.amount)
-        dateLabel.text = expense.date.stringValue()
+        dateLabel.text = expense.date.monthDayYear()
     }
     
 
