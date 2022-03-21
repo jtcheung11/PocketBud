@@ -19,6 +19,8 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var percentBarProgressView: UIProgressView!
+    @IBOutlet weak var totalIncomeLabel: UILabel!
+    @IBOutlet weak var hideButton: UIButton!
     
     //MARK: - Properties
     var expensesFromCloudKit = [Expense]()
@@ -98,10 +100,10 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let spent = currentTotalSpentLabel.text, !spent.isEmpty,
               let income = incomeLabel.text, !income.isEmpty
         else { return }
-
+        
         let currentSpent = Double(spent.dropFirst()) ?? 0
         let currentIncome = Double(income.dropFirst()) ?? 1
-    
+        
         let percent = (currentSpent / currentIncome) * 100
         let percentWithSymbol = String(format: "%.1f",percent) + "%"
         percentLabel.text = String(percentWithSymbol)
@@ -158,13 +160,24 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeTextField.text = ""
         percentCalcuated()
     }
-
+    
     @IBAction func toCurrentMonthButtonTapped(_ sender: UIButton) {
-        if budgetDate != Date() {
-            budgetDate = Date()
-            fetchCategoryTotals()
-            ExpenseController.shared.expenses = []
-            updateViews()
+        budgetDate = Date()
+        fetchCategoryTotals()
+        ExpenseController.shared.expenses = []
+    }
+    
+    @IBAction func hideIncomeLabelTapped(_ sender: UIButton) {
+        if incomeLabel.isHidden == true {
+            incomeLabel.isHidden = false
+            totalIncomeLabel.isHidden = false
+            hideButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        } else if incomeLabel.isHidden == false {
+            
+            incomeLabel.isHidden = true
+            totalIncomeLabel.isHidden = true
+            hideButton.setImage(UIImage(systemName: "eye"), for: .normal
+            )
         }
     }
     
@@ -196,12 +209,18 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
+        
         if segue.identifier == "toExpenseDetailDV" {
-            guard let indexPath = categoryTotalsTableView.indexPathForSelectedRow else { return }
+            guard let indexPath = categoryTotalsTableView.indexPathForSelectedRow,
+                  let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
             let categoryThatWasTapped = CategoryTotalController.shared.categoryTotals[indexPath.row]
             destinationVC.categoryTotal = categoryThatWasTapped
+            destinationVC.currentDate = budgetDate
+        } else if segue.identifier == "toAllExpensesVC" {
+            guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
+            destinationVC.currentDate = budgetDate
         }
-        destinationVC.currentDate = budgetDate
     }
 } //End of class
+
+

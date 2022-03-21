@@ -11,6 +11,7 @@
 		4A02994627E0C20B000D8356 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994527E0C20B000D8356 /* Income.swift */; };
 		4A02994827E0C6D6000D8356 /* IncomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994727E0C6D5000D8356 /* IncomeController.swift */; };
 		4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4090F427D995D400609563 /* BudgetViewController.swift */; };
+		4A6BE6E327E4E44600888121 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6BE6E227E4E44600888121 /* ChartViewController.swift */; };
 		4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */; };
 		4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */; };
 		4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */; };
@@ -31,13 +32,16 @@
 		4AC6E70527E3D35A00407F31 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6E70427E3D35A00407F31 /* ButtonStyle.swift */; };
 		4AEA819227DBBBD9009AB69E /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */; };
 		4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */; };
+		E771177C4889746E10B78A5B /* Pods_PocketBud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F820B05C71C56FF3F87A06 /* Pods_PocketBud.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38AD4172D6F55DBD274C73F3 /* Pods-PocketBud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketBud.debug.xcconfig"; path = "Target Support Files/Pods-PocketBud/Pods-PocketBud.debug.xcconfig"; sourceTree = "<group>"; };
 		4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertToDollarHelper.swift; sourceTree = "<group>"; };
 		4A02994527E0C20B000D8356 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		4A02994727E0C6D5000D8356 /* IncomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeController.swift; sourceTree = "<group>"; };
 		4A4090F427D995D400609563 /* BudgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
+		4A6BE6E227E4E44600888121 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTableViewCell.swift; sourceTree = "<group>"; };
 		4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailViewController.swift; sourceTree = "<group>"; };
 		4A97AA3227D7AD2F00A2BAF0 /* CategoryTotalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTotalController.swift; sourceTree = "<group>"; };
@@ -62,6 +66,8 @@
 		4AC6E70427E3D35A00407F31 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		8C362DD79AE530560250B836 /* Pods-PocketBud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketBud.release.xcconfig"; path = "Target Support Files/Pods-PocketBud/Pods-PocketBud.release.xcconfig"; sourceTree = "<group>"; };
+		C1F820B05C71C56FF3F87A06 /* Pods_PocketBud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PocketBud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ABEE43227D6B67200A48BEA /* CloudKit.framework in Frameworks */,
+				E771177C4889746E10B78A5B /* Pods_PocketBud.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +89,7 @@
 				4AB5E2AD27D1687400C25342 /* PocketBud */,
 				4AB5E2AC27D1687400C25342 /* Products */,
 				4ABEE43027D6B67200A48BEA /* Frameworks */,
+				CBC986468BFECA3BE2C3D42C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,6 +161,7 @@
 				4A97AA3027D7A23200A2BAF0 /* ExpenseDetailViewController.swift */,
 				4A4090F427D995D400609563 /* BudgetViewController.swift */,
 				4AB5E2C727D168F700C25342 /* CustomCellControllers */,
+				4A6BE6E227E4E44600888121 /* ChartViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,8 +203,18 @@
 			isa = PBXGroup;
 			children = (
 				4ABEE43127D6B67200A48BEA /* CloudKit.framework */,
+				C1F820B05C71C56FF3F87A06 /* Pods_PocketBud.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CBC986468BFECA3BE2C3D42C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				38AD4172D6F55DBD274C73F3 /* Pods-PocketBud.debug.xcconfig */,
+				8C362DD79AE530560250B836 /* Pods-PocketBud.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,9 +224,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AB5E2BF27D1687900C25342 /* Build configuration list for PBXNativeTarget "PocketBud" */;
 			buildPhases = (
+				E277650EE4D4D339BB26C690 /* [CP] Check Pods Manifest.lock */,
 				4AB5E2A727D1687400C25342 /* Sources */,
 				4AB5E2A827D1687400C25342 /* Frameworks */,
 				4AB5E2A927D1687400C25342 /* Resources */,
+				F74AC2D9A067575E517F6368 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -264,6 +285,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E277650EE4D4D339BB26C690 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PocketBud-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F74AC2D9A067575E517F6368 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PocketBud/Pods-PocketBud-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PocketBud/Pods-PocketBud-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PocketBud/Pods-PocketBud-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4AB5E2A727D1687400C25342 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -277,6 +340,7 @@
 				4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */,
 				4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */,
 				4ABEE42627D673F700A48BEA /* Expense.swift in Sources */,
+				4A6BE6E327E4E44600888121 /* ChartViewController.swift in Sources */,
 				4A97AA3327D7AD2F00A2BAF0 /* CategoryTotalController.swift in Sources */,
 				4A97AA3127D7A23200A2BAF0 /* ExpenseDetailViewController.swift in Sources */,
 				4AB5E2AF27D1687400C25342 /* AppDelegate.swift in Sources */,
@@ -432,6 +496,7 @@
 		};
 		4AB5E2C027D1687900C25342 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38AD4172D6F55DBD274C73F3 /* Pods-PocketBud.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,6 +527,7 @@
 		};
 		4AB5E2C127D1687900C25342 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8C362DD79AE530560250B836 /* Pods-PocketBud.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

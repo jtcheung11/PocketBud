@@ -3,52 +3,87 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Chart View Controller-->
         <scene sceneID="5fN-KJ-hTE">
             <objects>
-                <viewController id="QCW-Vu-Gd2" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="KBZ-LF-rU3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <viewController id="QCW-Vu-Gd2" customClass="ChartViewController" customModule="PocketBud" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KBZ-LF-rU3" customClass="Gradient" customModule="PocketBud" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSl-4t-Cwc" customClass="Gradient" customModule="PocketBud" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
-                                        <real key="value" value="0.10000000000000001"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
-                                        <real key="value" value="0.69999999999999996"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="horizontalMode" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="YES"/>
-                                </userDefinedRuntimeAttributes>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfc-xa-oHr">
+                                <rect key="frame" x="20" y="20" width="41" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.62577717850000003" green="0.96109672889999997" blue="1" alpha="0.90024925379999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <backgroundConfiguration key="background" strokeWidth="1">
+                                        <color key="strokeColor" red="0.62577717850000003" green="0.96109672889999997" blue="1" alpha="0.90024925379999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </backgroundConfiguration>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="QCW-Vu-Gd2" eventType="touchUpInside" id="VNW-3K-IBr"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ne-TV-wGz" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="24" y="221" width="366" height="366"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6ne-TV-wGz" secondAttribute="height" multiplier="1:1" id="SSn-9A-8Oc"/>
+                                </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t5y-yV-mPj">
+                                <rect key="frame" x="16" y="173.5" width="382" height="35.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Spending Trends">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="22" name="Noteworthy-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Sxc-m6-lZX"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dSl-4t-Cwc" firstAttribute="top" secondItem="KBZ-LF-rU3" secondAttribute="top" constant="44" id="TCk-pW-zoy"/>
-                            <constraint firstItem="dSl-4t-Cwc" firstAttribute="leading" secondItem="KBZ-LF-rU3" secondAttribute="leading" id="ggP-hJ-Gt2"/>
-                            <constraint firstAttribute="trailing" secondItem="dSl-4t-Cwc" secondAttribute="trailing" id="koS-BL-mKG"/>
-                            <constraint firstAttribute="bottom" secondItem="dSl-4t-Cwc" secondAttribute="bottom" constant="34" id="n0a-fL-LJW"/>
+                            <constraint firstItem="Sxc-m6-lZX" firstAttribute="trailing" secondItem="t5y-yV-mPj" secondAttribute="trailing" constant="16" id="1nU-li-KWY"/>
+                            <constraint firstItem="6ne-TV-wGz" firstAttribute="top" secondItem="t5y-yV-mPj" secondAttribute="bottom" constant="12" id="BAe-ej-px3"/>
+                            <constraint firstItem="6ne-TV-wGz" firstAttribute="trailing" secondItem="Sxc-m6-lZX" secondAttribute="trailing" constant="-24" id="QAG-Aa-lsE"/>
+                            <constraint firstItem="6ne-TV-wGz" firstAttribute="leading" secondItem="Sxc-m6-lZX" secondAttribute="leading" constant="24" id="eDR-lA-FqM"/>
+                            <constraint firstItem="t5y-yV-mPj" firstAttribute="leading" secondItem="Sxc-m6-lZX" secondAttribute="leading" constant="16" id="heb-LL-E7u"/>
+                            <constraint firstItem="6ne-TV-wGz" firstAttribute="centerY" secondItem="Sxc-m6-lZX" secondAttribute="centerY" id="jyt-6U-9um"/>
+                            <constraint firstItem="6ne-TV-wGz" firstAttribute="centerX" secondItem="Sxc-m6-lZX" secondAttribute="centerX" id="yar-fn-pfa"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" red="0.063542593049999999" green="0.31465667520000001" blue="0.71876202209999995" alpha="0.93840188541502478" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" red="0.62577717850000003" green="0.96109672889999997" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="startLocation">
+                                <real key="value" value="0.20000000000000001"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
+                                <real key="value" value="0.69999999999999996"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="currentMonthPieChart" destination="6ne-TV-wGz" id="dyD-mk-reo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dXe-WQ-ShK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="390" y="-502"/>
+            <point key="canvasLocation" x="1203" y="-457"/>
         </scene>
         <!--Budget View Controller-->
         <scene sceneID="A9c-CB-Uja">
@@ -136,7 +171,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="56" translatesAutoresizingMaskIntoConstraints="NO" id="ots-iy-7tc">
                                         <rect key="frame" x="44" y="24" width="326" height="36"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter this months income..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAA-uS-EK2">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter this months income..." textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAA-uS-EK2">
                                                 <rect key="frame" x="0.0" y="0.0" width="168.5" height="36"/>
                                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -218,56 +253,75 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qki-gy-6fz">
-                                <rect key="frame" x="0.0" y="271" width="414" height="145"/>
+                                <rect key="frame" x="0.0" y="285" width="414" height="131"/>
                                 <subviews>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kwC-6P-KKc">
-                                        <rect key="frame" x="16" y="101" width="382" height="4"/>
+                                        <rect key="frame" x="16" y="87" width="382" height="4"/>
                                     </progressView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nsk-zx-ZBR">
-                                        <rect key="frame" x="221.5" y="16" width="160.5" height="63"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="9JP-Ov-Xnl">
+                                        <rect key="frame" x="40.5" y="12" width="333.5" height="63"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percent of Income Spent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMx-zZ-gne">
-                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="27.5"/>
-                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(  % )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTk-SC-TOh">
-                                                <rect key="frame" x="62.5" y="35.5" width="36" height="27.5"/>
-                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTN-IF-SKQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="52" height="63"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="eye.slash" catalog="system">
+                                                    <color key="baseForegroundColor" red="0.063542593049999999" green="0.31465667520000001" blue="0.71876202209999995" alpha="0.93840188540000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="hideIncomeLabelTapped:" destination="3TT-ko-2gy" eventType="touchUpInside" id="cVy-ed-Ogs"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BOh-M2-33p">
+                                                <rect key="frame" x="58" y="0.0" width="109" height="63"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Income" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-Rj-xZs">
+                                                        <rect key="frame" x="14.5" y="0.0" width="79.5" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(total budgeted)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqj-kr-sin">
+                                                        <rect key="frame" x="0.0" y="35.5" width="109" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Nsk-zx-ZBR">
+                                                <rect key="frame" x="173" y="0.0" width="160.5" height="63"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percent of Income Spent" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMx-zZ-gne">
+                                                        <rect key="frame" x="0.0" y="0.0" width="160.5" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(  % )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JTk-SC-TOh">
+                                                        <rect key="frame" x="62" y="35.5" width="36" height="27.5"/>
+                                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BOh-M2-33p">
-                                        <rect key="frame" x="32" y="16" width="109" height="63"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Income" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-Rj-xZs">
-                                                <rect key="frame" x="15" y="0.0" width="79.5" height="27.5"/>
-                                                <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="(total budgeted)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqj-kr-sin">
-                                                <rect key="frame" x="0.0" y="35.5" width="109" height="27.5"/>
-                                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="LTN-IF-SKQ" firstAttribute="top" secondItem="9JP-Ov-Xnl" secondAttribute="top" id="cLM-IW-1L6"/>
+                                            <constraint firstItem="LTN-IF-SKQ" firstAttribute="leading" secondItem="9JP-Ov-Xnl" secondAttribute="leading" id="sTF-11-BwS"/>
+                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.70135336364341883" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="9JP-Ov-Xnl" firstAttribute="centerX" secondItem="qki-gy-6fz" secondAttribute="centerX" id="1S6-TH-KYj"/>
                                     <constraint firstAttribute="trailing" secondItem="kwC-6P-KKc" secondAttribute="trailing" constant="16" id="2GT-pA-HOt"/>
                                     <constraint firstItem="kwC-6P-KKc" firstAttribute="leading" secondItem="qki-gy-6fz" secondAttribute="leading" constant="16" id="9Gy-gx-tIX"/>
-                                    <constraint firstItem="kwC-6P-KKc" firstAttribute="top" secondItem="BOh-M2-33p" secondAttribute="bottom" constant="22" id="D2N-yF-hrZ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Nsk-zx-ZBR" secondAttribute="trailing" constant="32" id="Dma-nX-AEo"/>
-                                    <constraint firstItem="BOh-M2-33p" firstAttribute="leading" secondItem="qki-gy-6fz" secondAttribute="leading" constant="32" id="RJr-FX-hpX"/>
-                                    <constraint firstItem="kwC-6P-KKc" firstAttribute="top" secondItem="Nsk-zx-ZBR" secondAttribute="bottom" constant="22" id="Shr-Vv-ami"/>
+                                    <constraint firstItem="9JP-Ov-Xnl" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qki-gy-6fz" secondAttribute="leading" constant="16" id="VRJ-OO-nEs"/>
                                     <constraint firstAttribute="bottom" secondItem="kwC-6P-KKc" secondAttribute="bottom" constant="40" id="a2c-ZU-7Gi"/>
-                                    <constraint firstItem="BOh-M2-33p" firstAttribute="top" secondItem="qki-gy-6fz" secondAttribute="top" constant="16" id="kDw-Mx-xB8"/>
+                                    <constraint firstItem="kwC-6P-KKc" firstAttribute="top" secondItem="9JP-Ov-Xnl" secondAttribute="bottom" constant="12" id="i5J-BG-OG0"/>
+                                    <constraint firstItem="9JP-Ov-Xnl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qki-gy-6fz" secondAttribute="top" constant="12" id="l8E-zH-fZm"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9JP-Ov-Xnl" secondAttribute="trailing" constant="16" id="lo7-HC-SsN"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -277,10 +331,12 @@
                             <constraint firstItem="OZy-bz-Prk" firstAttribute="leading" secondItem="eQt-vy-eWG" secondAttribute="leading" id="756-1w-WoW"/>
                             <constraint firstItem="eQt-vy-eWG" firstAttribute="trailing" secondItem="jmZ-Y1-h9V" secondAttribute="trailing" id="7kr-B5-b7D"/>
                             <constraint firstItem="qki-gy-6fz" firstAttribute="leading" secondItem="eQt-vy-eWG" secondAttribute="leading" id="8Ud-Zp-wp4"/>
+                            <constraint firstItem="qki-gy-6fz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="OZy-bz-Prk" secondAttribute="bottom" constant="28" id="9Kd-3W-Snf"/>
                             <constraint firstItem="jmZ-Y1-h9V" firstAttribute="top" secondItem="qki-gy-6fz" secondAttribute="bottom" constant="-18" id="ArX-PH-mh7"/>
                             <constraint firstItem="eQt-vy-eWG" firstAttribute="trailing" secondItem="OZy-bz-Prk" secondAttribute="trailing" id="EaO-hU-EcA"/>
                             <constraint firstItem="jmZ-Y1-h9V" firstAttribute="leading" secondItem="eQt-vy-eWG" secondAttribute="leading" id="Esb-rV-p4X"/>
                             <constraint firstItem="jmZ-Y1-h9V" firstAttribute="top" secondItem="0YX-69-N7f" secondAttribute="top" constant="398" id="IGV-VQ-MlK"/>
+                            <constraint firstItem="qki-gy-6fz" firstAttribute="top" secondItem="OZy-bz-Prk" secondAttribute="bottom" constant="42" id="TSd-SA-SvS"/>
                             <constraint firstItem="eQt-vy-eWG" firstAttribute="trailing" secondItem="qki-gy-6fz" secondAttribute="trailing" id="gwI-rs-P5a"/>
                             <constraint firstItem="OZy-bz-Prk" firstAttribute="top" secondItem="eQt-vy-eWG" secondAttribute="top" constant="24" id="osc-tQ-paY"/>
                             <constraint firstAttribute="bottom" secondItem="jmZ-Y1-h9V" secondAttribute="bottom" id="owu-q3-fIZ"/>
@@ -288,12 +344,25 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="cFj-Ph-B7c">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Spent" image="dollarsign.circle" catalog="system" id="seC-ab-U2u">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="nPQ-Ia-2pI" kind="show" id="T3s-s9-cxM"/>
+                                <segue destination="nPQ-Ia-2pI" kind="show" identifier="toAllExpensesVC" id="T3s-s9-cxM"/>
                             </connections>
                         </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eBd-gd-CU8">
+                            <rect key="frame" x="184.5" y="6.5" width="45" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" imagePadding="8">
+                                <imageReference key="image" image="chart.pie.fill" catalog="system" symbolScale="large"/>
+                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </buttonConfiguration>
+                            <connections>
+                                <segue destination="QCW-Vu-Gd2" kind="presentation" identifier="toChartVC" id="tZ7-Zj-OEM"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zg9-L4-L8j">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -305,6 +374,7 @@
                     <connections>
                         <outlet property="categoryTotalsTableView" destination="Pmg-Sy-rBl" id="4gP-tN-Jep"/>
                         <outlet property="currentTotalSpentLabel" destination="JGb-9f-JBS" id="p9L-kl-ak8"/>
+                        <outlet property="hideButton" destination="LTN-IF-SKQ" id="gJa-LU-BiP"/>
                         <outlet property="incomeAndCateogryTotalsView" destination="jmZ-Y1-h9V" id="y8C-Cy-WmO"/>
                         <outlet property="incomeLabel" destination="Fqj-kr-sin" id="zo9-bH-uhR"/>
                         <outlet property="incomeTextField" destination="uAA-uS-EK2" id="jTN-bu-q4S"/>
@@ -312,6 +382,7 @@
                         <outlet property="percentBarProgressView" destination="kwC-6P-KKc" id="h1i-Om-Vrk"/>
                         <outlet property="percentLabel" destination="JTk-SC-TOh" id="oXV-78-smU"/>
                         <outlet property="progressBarView" destination="qki-gy-6fz" id="Mh0-cc-B6U"/>
+                        <outlet property="totalIncomeLabel" destination="bOh-Rj-xZs" id="Ahc-b6-x9e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yw-NN-g7i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -331,7 +402,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.063542593049999999" green="0.31465667520000001" blue="0.71876202209999995" alpha="0.9599044497" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" subtitle="" cornerStyle="capsule">
+                                <buttonConfiguration key="configuration" style="tinted" subtitle="" cornerStyle="large">
                                     <backgroundConfiguration key="background" strokeWidth="1">
                                         <color key="strokeColor" red="0.62577717850000003" green="0.96109672889999997" blue="1" alpha="0.90024925379999998" colorSpace="custom" customColorSpace="sRGB"/>
                                     </backgroundConfiguration>
@@ -363,7 +434,6 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Where did you buy from?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GgG-aD-k9r">
                                                 <rect key="frame" x="0.0" y="44" width="199" height="132"/>
-                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -394,7 +464,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Category..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a51-f1-jvJ">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Category..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a51-f1-jvJ">
                                                 <rect key="frame" x="0.0" y="42.5" width="145" height="133.5"/>
                                                 <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="18"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -402,15 +472,12 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="Ijc-gh-TH6" firstAttribute="width" secondItem="GgG-aD-k9r" secondAttribute="width" multiplier="1.05276" id="5q0-Fd-NP9"/>
-                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h0F-zh-dUd">
                                 <rect key="frame" x="32" y="32" width="40.5" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="0.063542593049999999" green="0.31465667520000001" blue="0.71876202209999995" alpha="0.9599044497" colorSpace="custom" customColorSpace="sRGB"/>
-                                <buttonConfiguration key="configuration" style="tinted">
+                                <buttonConfiguration key="configuration" style="tinted" cornerStyle="large">
                                     <backgroundConfiguration key="background">
                                         <color key="strokeColor" red="0.063542593049999999" green="0.31465667520000001" blue="0.71876202209999995" alpha="0.9599044497" colorSpace="custom" customColorSpace="sRGB"/>
                                     </backgroundConfiguration>
@@ -527,13 +594,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Pga-aW-8tV">
                                                             <rect key="frame" x="0.0" y="16" width="108.5" height="59.5"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(patron)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgE-Wm-vpv">
                                                                     <rect key="frame" x="0.0" y="0.0" width="108.5" height="27.5"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="(date/time created)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqc-mh-pqV">
                                                                     <rect key="frame" x="0.0" y="35.5" width="108.5" height="24"/>
                                                                     <fontDescription key="fontDescription" name="Noteworthy-Light" family="Noteworthy" pointSize="15"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -627,7 +694,9 @@
     <resources>
         <image name="arrow.left.circle.fill" catalog="system" width="128" height="121"/>
         <image name="arrow.right.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="chart.pie.fill" catalog="system" width="128" height="121"/>
         <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
+        <image name="eye.slash" catalog="system" width="128" height="86"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

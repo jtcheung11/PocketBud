@@ -11,10 +11,8 @@ import CloudKit
 class CategoryTotalController {
     
     static let shared = CategoryTotalController()
-    
     var categoryTotals: [CategoryTotal] = []
     let privateDB = CKContainer.default().privateCloudDatabase
-    
     
     func createCategoryTotal(categoryName: String, total: Double, completion: @escaping (Result<CategoryTotal, NetworkError>) -> Void) {
         let components = Calendar.current.dateComponents([.month , .year], from: Date())

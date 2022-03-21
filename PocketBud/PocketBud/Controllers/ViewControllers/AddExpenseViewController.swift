@@ -20,10 +20,22 @@ class AddExpenseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeHideKeyboard()
         pickerViewInput()
         updateView()
         
     }
+    
+    func initializeHideKeyboard(){
+           let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+               target: self,
+               action: #selector(dismissKeyboard))
+           view.addGestureRecognizer(tap)
+       }
+       
+       @objc func dismissKeyboard(){
+           view.endEditing(true)
+       }
     
     func pickerViewInput() {
         pickerView.delegate = self
