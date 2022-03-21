@@ -14,6 +14,14 @@ class CategoryTotalController {
     var categoryTotals: [CategoryTotal] = []
     let privateDB = CKContainer.default().privateCloudDatabase
     
+    
+    /**
+     Creates a new CategoryTotal when the user picks a category that does not have any other expenses in it.
+     
+     - Parameter date: categoryName: The category picked by the user, total: the amount input by the user, completion: @escaping (Result<CategoryTotal, NetworkError>) -> Void
+     
+     -  Throws:  'ckError'
+     */
     func createCategoryTotal(categoryName: String, total: Double, completion: @escaping (Result<CategoryTotal, NetworkError>) -> Void) {
         let components = Calendar.current.dateComponents([.month , .year], from: Date())
         
@@ -36,6 +44,13 @@ class CategoryTotalController {
         }
         
     }
+    
+    /**
+     fetches all Category Totals from the cloud based on the month the user is in.
+     
+     - Parameter date: the date of teh fetched catagory totals
+     
+     */
     
     func fetchCategoryTotals(date: Date, completion: @escaping(Bool)-> Void) {
         let components = Calendar.current.dateComponents([.month , .year], from: date)
@@ -85,6 +100,12 @@ class CategoryTotalController {
         privateDB.add(operation)
     }
     
+    /**
+     Updates a Category Total when user adds a new expense via the "+" button
+     
+     - Parameter categoryTotal: The CategoryTotal that is selected by the user,  total: All the expenses that are in the Category selected, completion:
+     
+     */
     func updateCategoryTotal(_ categoryTotal: CategoryTotal, total: Double, completion: @escaping(Bool) -> Void ) {
         categoryTotal.total += total
         
@@ -105,11 +126,16 @@ class CategoryTotalController {
         privateDB.add(operation)
     }
     
+    /**
+     Updates a Category Total when a new Category is picked by the user
+     
+     - Parameter oldCategory: Category Selected Previously by user, newCategory: Different category selected by user, amount: Amount input by user should NOT change , completion
+     
+     */
     func updatCategoryTotalWithNewExpenseCategory(oldCategory: String, newCategory: String, amount: Double, completion: @escaping (Bool) -> Void) {
-        // Step 1 - get oldCategoryTotal
         guard let oldCategoryTotal = categoryTotals.first(where: { $0.categoryName == oldCategory }) else { return completion(false) }
         let group = DispatchGroup()
-        // Step 3 - subtract amount from oldCategoryTotal and update
+
         group.enter()
         updateCategoryTotal(oldCategoryTotal, total: -amount) { success in
             if success {
@@ -118,8 +144,7 @@ class CategoryTotalController {
                 return completion(false)
             }
         }
-        // Step 2 - get or create newCategoryTotal
-        // Step 4 - add amount to newCategoryTotal and update
+       
         group.enter()
         if let newCategoryTotal = categoryTotals.first(where: { $0.categoryName == newCategory }) {
             updateCategoryTotal(newCategoryTotal, total: amount) { success in
@@ -140,26 +165,34 @@ class CategoryTotalController {
                 }
             }
         }
-        // Step 5 - Dispatch Group
+      
         group.notify(queue: .main) {
             return completion(true)
         }
     }
     
+    /**
+     Updates a CategoryTotal when the amount in the CategoryTotal is altered/updated by the user
+     
+     - Parameter date: category: original Category picked by the user, oldAmount: The old amount the user input , newAmount: The new amount the user input, completion:
+     
+     */
     func updateCategoryTotalWithNewAmount(category: String, oldAmount: Double, newAmount: Double, completion: @escaping(Bool)-> Void) {
-        // Step 1 - get categoryTotal
         guard let category = categoryTotals.first(where: { $0.categoryName == category }) else { return completion(false)}
-        // Step 2 - add or subtract amount from categoryTotal.total
         let differenceAmount = newAmount - oldAmount
-        // Step 3 - update categoryTotal
         updateCategoryTotal(category, total: differenceAmount) { success in
             return completion(true)
         }
     }
     
+    /**
+     Updates a CategoryTotal when the amount in the CategoryTotal is altered/updated  and when a new Cateogry is picked by the user
+     
+     - Parameter date: category: original Category picked by the user, newCategory: the new Category picked by the user , oldAmount: The old amount the user input , newAmount: The new amount the user input, completion:
+     
+     */
     func updateBothCategoryTotals(oldCategory: String, newCategory: String, oldAmount: Double, newAmount: Double, completion: @escaping(Bool) -> Void) {
-        // Step 1 - get oldCategoryTotal
-        // Step 3 - subtract oldAmount from oldCategoryTotal and update
+    
         guard let oldCategoryTotal = categoryTotals.first(where: { $0.categoryName == oldCategory }) else { return completion(false)}
         let group = DispatchGroup()
         group.enter()
@@ -170,8 +203,7 @@ class CategoryTotalController {
                 return completion(false)
             }
         }
-        // Step 2 - get or create newCategoryTotal
-        // Step 4 - add newAmount to newCategoryTotal and update
+      
         group.enter()
         if let newCategoryTotal = categoryTotals.first(where: { $0.categoryName == newCategory }) {
             updateCategoryTotal(newCategoryTotal, total: newAmount) { success in
@@ -191,12 +223,18 @@ class CategoryTotalController {
                 }
             }
         }
-        // Step 5 - Dispath Group
+    
         group.notify(queue: .main) {
             return completion(true)
         }
     }
     
+    /**
+     Updates a CategoryTotal when the user deletes an expense
+     
+     - Parameter category: category picked by user, total: input by user, completion:
+     
+     */
     func updateWhenExpenseDeleted(category: String, total: Double, completion: @escaping(Bool) -> Void) {
         // Step 1 - get categoryTotal
         guard let categoryTotal = categoryTotals.first(where: { $0.categoryName == category }) else

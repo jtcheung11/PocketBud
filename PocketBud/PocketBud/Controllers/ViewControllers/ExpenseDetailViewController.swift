@@ -22,7 +22,6 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     var expenses: [Expense] = []
     var categoryTotal: CategoryTotal?
     var currentDate = Date()
-//    var budgetDate: Date?
     
     
     //MARK: - LifyCycles

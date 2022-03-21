@@ -63,16 +63,13 @@ class IncomeController {
                     fetchedIncomes.sort(by: { $0.date > $1.date })
                     self.currentIncome = fetchedIncomes.first
                     return completion(true)
-                    
                 }
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 return completion(false)
             }
-            
         }
         privateDB.add(operation)
-        
     }
     
     func updateIncome(_ income: Income, newIncome : Double, completion: @escaping(Bool) -> Void) {

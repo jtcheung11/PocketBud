@@ -173,7 +173,6 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
             totalIncomeLabel.isHidden = false
             hideButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
         } else if incomeLabel.isHidden == false {
-            
             incomeLabel.isHidden = true
             totalIncomeLabel.isHidden = true
             hideButton.setImage(UIImage(systemName: "eye"), for: .normal

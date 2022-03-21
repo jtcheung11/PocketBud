@@ -15,7 +15,6 @@ class ExpenseController {
     let privateDB = CKContainer.default().privateCloudDatabase
     
     //MARK - CRUD
-    //Create
     func addExpense(business: String, category: String, amount: Double, completion: @escaping(Bool) -> Void) {
         
         var needsUpdated = false
@@ -44,7 +43,6 @@ class ExpenseController {
             }
         }
         group.notify(queue: .main) { [weak self] in
-            
             guard let categoryTotalReference = categoryTotalReference else { return completion(false) }
             let newExpense = Expense(business: business, category: category, amount: amount, categoryTotalReference: categoryTotalReference)
             let expenseRecord = CKRecord(expense: newExpense)
@@ -72,7 +70,6 @@ class ExpenseController {
         }
     }
     
-    //Retrieve/Fetch
     func fetchExpenses(for date: Date, completion: @escaping(Bool) -> Void) {
         
         let date = Calendar.current.date(byAdding: .month, value: -1, to: date) ?? Date()
@@ -124,12 +121,6 @@ class ExpenseController {
         privateDB.add(operation)
     }
     
-    //Fetch Categories fileted by date/category selected
-    func fetchExpensesForSelectedCategory () {
-        
-    }
-    
-    //Update
     func updateExpense(_ expense: Expense, category: String,  amount: Double, business: String ,completion: @escaping(Bool)-> Void) {
         
         var oldCategory: String?
@@ -171,8 +162,6 @@ class ExpenseController {
         privateDB.add(operation)
     }
     
-    
-    //delete
     func deleteExpense(_ expense: Expense, completion: @escaping (Bool) -> Void ) {
         let operation = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [expense.recordID])
         

@@ -9,13 +9,15 @@ import UIKit
 import Charts
 
 class ChartViewController: UIViewController {
-   //MARK: -
+    //MARK: -
     
     @IBOutlet weak var currentMonthPieChart: PieChartView!
+    @IBOutlet weak var monthLabel: UILabel!
+    
     
     //MARK: - Properties
-    
     var budgetDate = Date()
+    
     var categories: [String] = {
         var placeHolder: [String] = []
         CategoryTotalController.shared.categoryTotals.forEach({ placeHolder.append($0.categoryName) })
@@ -42,9 +44,15 @@ class ChartViewController: UIViewController {
             dataEntries.append(dataEntry)
         }
         let pieChartDataSet = PieChartDataSet(entries: dataEntries, label: "")
-        pieChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
+        
+        if dataPoints.count <= 4 {
+            pieChartDataSet.colors = ChartColorTemplates.material()
+        } else {
+            pieChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
+        }
         pieChartDataSet.form = .circle
-       
+        pieChartDataSet.valueFont = UIFont(name: "Noteworthy", size: 15)!
+        
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         
         let format = NumberFormatter()
@@ -52,22 +60,25 @@ class ChartViewController: UIViewController {
         
         let formatter = DefaultValueFormatter(formatter: format)
         pieChartData.setValueFormatter(formatter)
-        
+       
+        currentMonthPieChart.legend.font = UIFont(name: "Noteworthy", size: 17)!
         currentMonthPieChart.drawEntryLabelsEnabled = false
         currentMonthPieChart.data = pieChartData
+        
+        monthLabel.text = budgetDate.dateAsMonth()
     }
-
+    
     
     private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
-      var colors: [UIColor] = []
-      for _ in 0..<numbersOfColor {
-        let red = Double(arc4random_uniform(256))
-        let green = Double(arc4random_uniform(256))
-        let blue = Double(arc4random_uniform(256))
-        let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-        colors.append(color)
-      }
-      return colors
+        var colors: [UIColor] = []
+        for _ in 0..<numbersOfColor {
+            let red = Double(arc4random_uniform(256))
+            let green = Double(arc4random_uniform(256))
+            let blue = Double(arc4random_uniform(256))
+            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+            colors.append(color)
+        }
+        return colors
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {

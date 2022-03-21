@@ -87,9 +87,6 @@ class AddExpenseViewController: UIViewController {
         categoryTextField.text = expense.category
         amountTextField.text = String(expense.amount)
     }
-    
-    
-    
 } //End of class
 
 extension AddExpenseViewController: UIPickerViewDelegate, UIPickerViewDataSource {
