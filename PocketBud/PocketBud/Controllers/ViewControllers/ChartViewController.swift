@@ -17,7 +17,7 @@ class ChartViewController: UIViewController {
     
     //MARK: - Properties
     var budgetDate = Date()
-    
+    var chartColors: [UIColor] = [#colorLiteral(red: 1, green: 0.1491002738, blue: 0, alpha: 1), #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 1, green: 0.173960674, blue: 0.587517369, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 0.8587893091, green: 0.6070529848, blue: 0.2928512582, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)]
     var categories: [String] = {
         var placeHolder: [String] = []
         CategoryTotalController.shared.categoryTotals.forEach({ placeHolder.append($0.categoryName) })
@@ -45,11 +45,7 @@ class ChartViewController: UIViewController {
         }
         let pieChartDataSet = PieChartDataSet(entries: dataEntries, label: "")
         
-        if dataPoints.count <= 4 {
-            pieChartDataSet.colors = ChartColorTemplates.material()
-        } else {
-            pieChartDataSet.colors = colorsOfCharts(numbersOfColor: dataPoints.count)
-        }
+        pieChartDataSet.colors = chartColors
         pieChartDataSet.form = .circle
         pieChartDataSet.valueFont = UIFont(name: "Noteworthy", size: 15)!
         
@@ -58,30 +54,26 @@ class ChartViewController: UIViewController {
         let format = NumberFormatter()
         format.numberStyle = .currency
         
-        let formatter = DefaultValueFormatter(formatter: format)
-        pieChartData.setValueFormatter(formatter)
-       
-        currentMonthPieChart.legend.font = UIFont(name: "Noteworthy", size: 17)!
+        format.usesGroupingSeparator = true
+        
+        let myFormatter = MyValueFormatter()
+        pieChartData.setValueFormatter(myFormatter)
+        
+        currentMonthPieChart.legend.font = UIFont(name: "Baskerville", size: 19)!
         currentMonthPieChart.drawEntryLabelsEnabled = false
         currentMonthPieChart.data = pieChartData
         
         monthLabel.text = budgetDate.dateAsMonth()
     }
     
-    
-    private func colorsOfCharts(numbersOfColor: Int) -> [UIColor] {
-        var colors: [UIColor] = []
-        for _ in 0..<numbersOfColor {
-            let red = Double(arc4random_uniform(256))
-            let green = Double(arc4random_uniform(256))
-            let blue = Double(arc4random_uniform(256))
-            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-            colors.append(color)
-        }
-        return colors
-    }
-    
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
+    }
+} //End of class
+
+class MyValueFormatter: ValueFormatter {
+    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+//        return ConvertToDollar.shared.toDollar(value: value)
+        return "$\(value)"
     }
 } //End of class
