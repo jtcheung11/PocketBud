@@ -32,6 +32,7 @@ class ChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        currentMonthPieChart.delegate = self
         customizedChart(dataPoints: categories, values: totals)
         
     }
@@ -47,7 +48,7 @@ class ChartViewController: UIViewController {
         
         pieChartDataSet.colors = chartColors
         pieChartDataSet.form = .circle
-        pieChartDataSet.valueFont = UIFont(name: "Noteworthy", size: 15)!
+        pieChartDataSet.valueFont = UIFont(name: "Baskerville", size: 15)!
         
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         
@@ -62,6 +63,9 @@ class ChartViewController: UIViewController {
         currentMonthPieChart.legend.font = UIFont(name: "Baskerville", size: 19)!
         currentMonthPieChart.drawEntryLabelsEnabled = false
         currentMonthPieChart.data = pieChartData
+        currentMonthPieChart.rotationEnabled = false
+        currentMonthPieChart.drawHoleEnabled = false
+        currentMonthPieChart.noDataFont = UIFont(name: "Baskerville", size: 25)!
         
         monthLabel.text = budgetDate.dateAsMonth()
     }
@@ -73,7 +77,13 @@ class ChartViewController: UIViewController {
 
 class MyValueFormatter: ValueFormatter {
     func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
-//        return ConvertToDollar.shared.toDollar(value: value)
-        return "$\(value)"
+        return ConvertToDollar.shared.toDollar(value: value)
+//        return "$\(value)"
     }
 } //End of class
+
+extension ChartViewController: ChartViewDelegate {
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+//        currentMonthPieChart.
+    }
+}

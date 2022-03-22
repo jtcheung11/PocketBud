@@ -21,6 +21,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var percentBarProgressView: UIProgressView!
     @IBOutlet weak var totalIncomeLabel: UILabel!
     @IBOutlet weak var hideButton: UIButton!
+    @IBOutlet weak var totalIncomeStackView: UIStackView!
     
     //MARK: - Properties
     var expensesFromCloudKit = [Expense]()
@@ -32,6 +33,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         setUpView()
         fetchCategoryTotals()
         fetchIncomeVDL()
+        initializeHideKeyboard()
         updateViews()
     }
     
@@ -81,6 +83,18 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         incomeAndCateogryTotalsView.layer.cornerRadius = 24
         incomeAndCateogryTotalsView.layer.maskedCorners = [.layerMinXMinYCorner,.layerMaxXMinYCorner]
     }
+    
+    func initializeHideKeyboard(){
+           let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+               target: self,
+               action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+           view.addGestureRecognizer(tap)
+       }
+       
+       @objc func dismissKeyboard(){
+           view.endEditing(true)
+       }
     
     func fetchIncomeVDL() {
         IncomeController.shared.fetchIncome { success in
@@ -168,15 +182,11 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func hideIncomeLabelTapped(_ sender: UIButton) {
-        if incomeLabel.isHidden == true {
-            incomeLabel.isHidden = false
-            totalIncomeLabel.isHidden = false
+        totalIncomeStackView.isHidden.toggle()
+        if totalIncomeStackView.isHidden == true {
             hideButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
-        } else if incomeLabel.isHidden == false {
-            incomeLabel.isHidden = true
-            totalIncomeLabel.isHidden = true
-            hideButton.setImage(UIImage(systemName: "eye"), for: .normal
-            )
+        } else {
+            hideButton.setImage(UIImage(systemName: "eye"), for: .normal)
         }
     }
     
