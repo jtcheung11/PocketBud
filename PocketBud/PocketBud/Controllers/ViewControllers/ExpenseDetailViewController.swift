@@ -27,6 +27,7 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     //MARK: - LifyCycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fetchExpensesVDL()
         setUpView()
         updateViews()
@@ -135,15 +136,20 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     func fetchExpensesVDL() {
         if ExpenseController.shared.expenses.isEmpty{
+            self.showSpinner(onView: self.view)
             ExpenseController.shared.fetchExpenses(for: currentDate) { success in
                 if success {
                     DispatchQueue.main.async {
+                        self.removeSpinner()
                         self.updateViews()
                         print(ExpenseController.shared.expenses)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.errorFetchingExenses()
                     }
                 }
             }
         }
     }
 } //End of class
-

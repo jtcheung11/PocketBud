@@ -16,7 +16,7 @@ class ChartViewController: UIViewController {
     
     //MARK: - Properties
     var budgetDate = Date()
-    var chartColors: [UIColor] = [#colorLiteral(red: 1, green: 0.1491002738, blue: 0, alpha: 1), #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 1, green: 0.173960674, blue: 0.587517369, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 0.8587893091, green: 0.6070529848, blue: 0.2928512582, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)]
+    var chartColors: [UIColor] = [#colorLiteral(red: 0.4392156863, green: 0.5529411765, blue: 0.5058823529, alpha: 1), #colorLiteral(red: 0.3450980392, green: 0.6431372549, blue: 0.6901960784, alpha: 1), #colorLiteral(red: 0.2588235294, green: 0.5058823529, blue: 0.6431372549, alpha: 1), #colorLiteral(red: 0.3333333333, green: 0.5098039216, blue: 0.5450980392, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.1333333333, green: 0.2, blue: 0.231372549, alpha: 1), #colorLiteral(red: 0.2117647059, green: 0.2862745098, blue: 0.3450980392, alpha: 1), #colorLiteral(red: 0.4969162549, green: 0.7700697986, blue: 0.8522654515, alpha: 1), #colorLiteral(red: 0.0862745098, green: 0.4117647059, blue: 0.4784313725, alpha: 1), #colorLiteral(red: 0, green: 0.1058823529, blue: 0.1803921569, alpha: 1)]
     var categories: [String] = {
         var placeHolder: [String] = []
         CategoryTotalController.shared.categoryTotals.forEach({ placeHolder.append($0.categoryName) })
@@ -82,6 +82,5 @@ class MyValueFormatter: ValueFormatter {
 
 extension ChartViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        //        currentMonthPieChart.
     }
 }

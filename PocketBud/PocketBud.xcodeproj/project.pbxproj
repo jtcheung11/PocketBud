@@ -10,6 +10,9 @@
 		4A02994427DFC1FA000D8356 /* ConvertToDollarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */; };
 		4A02994627E0C20B000D8356 /* Income.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994527E0C20B000D8356 /* Income.swift */; };
 		4A02994827E0C6D6000D8356 /* IncomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A02994727E0C6D5000D8356 /* IncomeController.swift */; };
+		4A36771E27EB337600142E00 /* Pocket_Bud.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A36771D27EB337600142E00 /* Pocket_Bud.png */; };
+		4A36772227EB584500142E00 /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36772127EB584500142E00 /* CircularProgressBar.swift */; };
+		4A36772427EB6A9B00142E00 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A36772327EB6A9B00142E00 /* AlertExtension.swift */; };
 		4A4090F527D995D400609563 /* BudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A4090F427D995D400609563 /* BudgetViewController.swift */; };
 		4A6BE6E327E4E44600888121 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6BE6E227E4E44600888121 /* ChartViewController.swift */; };
 		4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */; };
@@ -29,7 +32,6 @@
 		4ABEE42E27D6B0F300A48BEA /* ExpenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEE42D27D6B0F300A48BEA /* ExpenseController.swift */; };
 		4ABEE43227D6B67200A48BEA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABEE43127D6B67200A48BEA /* CloudKit.framework */; };
 		4AC6E70327E3BB3F00407F31 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6E70227E3BB3F00407F31 /* GradientView.swift */; };
-		4AEA819227DBBBD9009AB69E /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */; };
 		4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */; };
 		E771177C4889746E10B78A5B /* Pods_PocketBud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F820B05C71C56FF3F87A06 /* Pods_PocketBud.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,9 @@
 		4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertToDollarHelper.swift; sourceTree = "<group>"; };
 		4A02994527E0C20B000D8356 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
 		4A02994727E0C6D5000D8356 /* IncomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeController.swift; sourceTree = "<group>"; };
+		4A36771D27EB337600142E00 /* Pocket_Bud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pocket_Bud.png; sourceTree = "<group>"; };
+		4A36772127EB584500142E00 /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		4A36772327EB6A9B00142E00 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		4A4090F427D995D400609563 /* BudgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetViewController.swift; sourceTree = "<group>"; };
 		4A6BE6E227E4E44600888121 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		4A97AA2E27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -62,7 +67,6 @@
 		4ABEE42F27D6B66F00A48BEA /* PocketBud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PocketBud.entitlements; sourceTree = "<group>"; };
 		4ABEE43127D6B67200A48BEA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AC6E70227E3BB3F00407F31 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8C362DD79AE530560250B836 /* Pods-PocketBud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketBud.release.xcconfig"; path = "Target Support Files/Pods-PocketBud/Pods-PocketBud.release.xcconfig"; sourceTree = "<group>"; };
 		C1F820B05C71C56FF3F87A06 /* Pods_PocketBud.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PocketBud.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +124,7 @@
 				4AB5E2B027D1687400C25342 /* SceneDelegate.swift */,
 				4AB5E2B727D1687900C25342 /* Assets.xcassets */,
 				4AB5E2BC27D1687900C25342 /* Info.plist */,
+				4A36771D27EB337600142E00 /* Pocket_Bud.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -189,9 +194,10 @@
 			children = (
 				4ABC815C27D7ED5E00535631 /* NetworkError.swift */,
 				4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */,
-				4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */,
 				4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */,
 				4AC6E70227E3BB3F00407F31 /* GradientView.swift */,
+				4A36772127EB584500142E00 /* CircularProgressBar.swift */,
+				4A36772327EB6A9B00142E00 /* AlertExtension.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AB5E2BB27D1687900C25342 /* LaunchScreen.storyboard in Resources */,
+				4A36771E27EB337600142E00 /* Pocket_Bud.png in Resources */,
 				4AB5E2B827D1687900C25342 /* Assets.xcassets in Resources */,
 				4AB5E2B627D1687400C25342 /* Main.storyboard in Resources */,
 			);
@@ -331,7 +338,6 @@
 			files = (
 				4AC6E70327E3BB3F00407F31 /* GradientView.swift in Sources */,
 				4A02994627E0C20B000D8356 /* Income.swift in Sources */,
-				4AEA819227DBBBD9009AB69E /* DoubleExtension.swift in Sources */,
 				4A02994827E0C6D6000D8356 /* IncomeController.swift in Sources */,
 				4ABEE42A27D68AEE00A48BEA /* CategoryTotal.swift in Sources */,
 				4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */,
@@ -343,12 +349,14 @@
 				4AB5E2AF27D1687400C25342 /* AppDelegate.swift in Sources */,
 				4A02994427DFC1FA000D8356 /* ConvertToDollarHelper.swift in Sources */,
 				4AB5E2B127D1687400C25342 /* SceneDelegate.swift in Sources */,
+				4A36772427EB6A9B00142E00 /* AlertExtension.swift in Sources */,
 				4ABEE42427D673E800A48BEA /* Budget.swift in Sources */,
 				4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */,
 				4ABEE42227D673DA00A48BEA /* Category.swift in Sources */,
 				4ABC815D27D7ED5E00535631 /* NetworkError.swift in Sources */,
 				4ABEE42E27D6B0F300A48BEA /* ExpenseController.swift in Sources */,
 				4ABEE42C27D68F0B00A48BEA /* AddExpenseViewController.swift in Sources */,
+				4A36772227EB584500142E00 /* CircularProgressBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,8 +502,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 38AD4172D6F55DBD274C73F3 /* Pods-PocketBud.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = PocketBud/PocketBud.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -525,8 +534,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8C362DD79AE530560250B836 /* Pods-PocketBud.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = PocketBud/PocketBud.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

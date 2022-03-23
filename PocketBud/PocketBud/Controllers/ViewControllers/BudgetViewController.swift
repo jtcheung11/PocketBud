@@ -12,7 +12,6 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var progressBarView: UIView!
     @IBOutlet weak var incomeAndCateogryTotalsView: UIView!
     @IBOutlet weak var categoryTotalsTableView: UITableView!
-    
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var currentTotalSpentLabel: UILabel!
     @IBOutlet weak var incomeTextField: UITextField!
@@ -30,6 +29,7 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     //MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showSpinner(onView: self.view)
         setUpView()
         fetchCategoryTotals()
         fetchIncomeVDL()
@@ -127,12 +127,14 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func leftArrowButtonTapped(_ sender: Any) {
         budgetDate = Calendar.current.date(byAdding: .month, value: -1, to: budgetDate) ?? Date()
         fetchCategoryTotals()
+        self.showSpinner(onView: self.view)
         ExpenseController.shared.expenses = []
     }
     
     @IBAction func rightArrowButtonTapped(_ sender: Any) {
         budgetDate = Calendar.current.date(byAdding: .month, value: 1, to: budgetDate) ?? Date()
         fetchCategoryTotals()
+        self.showSpinner(onView: self.view)
         ExpenseController.shared.expenses = []
     }
     
@@ -196,9 +198,10 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if success {
                     self?.updateViews()
                     self?.percentCalcuated()
+                    self?.removeSpinner()
                     print("Successful in fetching all categoryTotals")
                 } else {
-                    print("Failed to fetch all categoryTotals")
+                    self?.errorFetchingCT()
                 }
             }
         }
@@ -228,6 +231,9 @@ class BudgetViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else if segue.identifier == "toAllExpensesVC" {
             guard let destinationVC = segue.destination as? ExpenseDetailViewController else { return }
             destinationVC.currentDate = budgetDate
+        } else if segue.identifier == "toChartVC" {
+            guard let destinationVC = segue.destination as? ChartViewController else { return }
+            destinationVC.budgetDate = budgetDate
         }
     }
 } //End of class
