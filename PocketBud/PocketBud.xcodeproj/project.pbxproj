@@ -29,7 +29,6 @@
 		4ABEE42E27D6B0F300A48BEA /* ExpenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABEE42D27D6B0F300A48BEA /* ExpenseController.swift */; };
 		4ABEE43227D6B67200A48BEA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ABEE43127D6B67200A48BEA /* CloudKit.framework */; };
 		4AC6E70327E3BB3F00407F31 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6E70227E3BB3F00407F31 /* GradientView.swift */; };
-		4AC6E70527E3D35A00407F31 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC6E70427E3D35A00407F31 /* ButtonStyle.swift */; };
 		4AEA819227DBBBD9009AB69E /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */; };
 		4AF08A6027DA1F2C00DF61ED /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */; };
 		E771177C4889746E10B78A5B /* Pods_PocketBud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F820B05C71C56FF3F87A06 /* Pods_PocketBud.framework */; };
@@ -63,7 +62,6 @@
 		4ABEE42F27D6B66F00A48BEA /* PocketBud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PocketBud.entitlements; sourceTree = "<group>"; };
 		4ABEE43127D6B67200A48BEA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4AC6E70227E3BB3F00407F31 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		4AC6E70427E3D35A00407F31 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		4AF08A5F27DA1F2C00DF61ED /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		8C362DD79AE530560250B836 /* Pods-PocketBud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketBud.release.xcconfig"; path = "Target Support Files/Pods-PocketBud/Pods-PocketBud.release.xcconfig"; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 				4AEA819127DBBBD9009AB69E /* DoubleExtension.swift */,
 				4A02994327DFC1FA000D8356 /* ConvertToDollarHelper.swift */,
 				4AC6E70227E3BB3F00407F31 /* GradientView.swift */,
-				4AC6E70427E3D35A00407F31 /* ButtonStyle.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -346,7 +343,6 @@
 				4AB5E2AF27D1687400C25342 /* AppDelegate.swift in Sources */,
 				4A02994427DFC1FA000D8356 /* ConvertToDollarHelper.swift in Sources */,
 				4AB5E2B127D1687400C25342 /* SceneDelegate.swift in Sources */,
-				4AC6E70527E3D35A00407F31 /* ButtonStyle.swift in Sources */,
 				4ABEE42427D673E800A48BEA /* Budget.swift in Sources */,
 				4A97AA2F27D7A1F900A2BAF0 /* ExpenseDetailTableViewCell.swift in Sources */,
 				4ABEE42227D673DA00A48BEA /* Category.swift in Sources */,

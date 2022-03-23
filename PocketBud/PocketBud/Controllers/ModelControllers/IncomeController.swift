@@ -35,7 +35,6 @@ class IncomeController {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: incomeStrings.recordTypeKey, predicate: predicate)
         var operation = CKQueryOperation(query: query)
-        
         var fetchedIncomes: [Income] = []
         
         operation.recordMatchedBlock = { (_, result ) in

@@ -23,33 +23,29 @@ class AddExpenseViewController: UIViewController {
         initializeHideKeyboard()
         pickerViewInput()
         updateView()
-        
     }
     
     func initializeHideKeyboard(){
-           let tap: UITapGestureRecognizer = UITapGestureRecognizer(
-               target: self,
-               action: #selector(dismissKeyboard))
-           view.addGestureRecognizer(tap)
-       }
-       
-       @objc func dismissKeyboard(){
-           view.endEditing(true)
-       }
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
     
     func pickerViewInput() {
         pickerView.delegate = self
         pickerView.dataSource = self
-        
         categoryTextField.inputView = pickerView
         categoryTextField.textAlignment = .center
     }
     
-    
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         self.dismiss(animated: true)
     }
-    
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let businessName = businessNameTextField.text, !businessName.isEmpty,
@@ -78,7 +74,6 @@ class AddExpenseViewController: UIViewController {
                 }
             }
         }
-        
     }
     
     func updateView() {
@@ -107,6 +102,4 @@ extension AddExpenseViewController: UIPickerViewDelegate, UIPickerViewDataSource
         categoryTextField.text = Category.allCases[row].rawValue
         categoryTextField.resignFirstResponder()
     }
-    
-    
 } // End of extension

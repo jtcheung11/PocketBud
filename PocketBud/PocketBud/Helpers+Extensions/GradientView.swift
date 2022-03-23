@@ -41,6 +41,5 @@ public class Gradient: UIView {
         updateLocations()
         updateColors()
     }
-
 }
 

@@ -133,7 +133,6 @@ class ExpenseController {
         if expense.amount != amount {
             oldAmount = expense.amount
         }
-        
         expense.business = business
         expense.amount = amount
         expense.category = category
@@ -145,7 +144,6 @@ class ExpenseController {
         operation.modifyRecordsResultBlock = { result in
             switch result {
             case .success():
-                
                 if let oldCategory = oldCategory, let oldAmount = oldAmount {
                     CategoryTotalController.shared.updateBothCategoryTotals(oldCategory: oldCategory, newCategory: category, oldAmount: oldAmount, newAmount: amount, completion: completion)
                 } else if let oldCategory = oldCategory {
@@ -153,7 +151,6 @@ class ExpenseController {
                 } else if let oldAmount = oldAmount {
                     CategoryTotalController.shared.updateCategoryTotalWithNewAmount(category: category, oldAmount: oldAmount, newAmount: amount, completion: completion)
                 }
-                
             case .failure(let error):
                 print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
                 return completion(false)
@@ -181,6 +178,5 @@ class ExpenseController {
         }
         privateDB.add(operation)
     }
-    
 }//End of class
 

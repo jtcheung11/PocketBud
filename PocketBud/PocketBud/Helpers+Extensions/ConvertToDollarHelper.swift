@@ -11,7 +11,5 @@ class ConvertToDollar {
     
     func toDollar(value: Double) -> String {
         return "$" + String(format: "%.2f", value)
-        
     }
-    
 }

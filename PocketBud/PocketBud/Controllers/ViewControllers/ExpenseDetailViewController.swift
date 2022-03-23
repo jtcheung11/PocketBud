@@ -47,10 +47,8 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "expenseCell", for: indexPath) as? ExpenseDetailTableViewCell else { return UITableViewCell()}
-        
         let expense = expenses[indexPath.row]
         cell.expense = expense
-        
         return cell
     }
     
@@ -98,10 +96,7 @@ class ExpenseDetailViewController: UIViewController, UITableViewDelegate, UITabl
     
     
     func updateViews() {
-        
         currentDateLabel.text = currentDate.monthDayYear()
-        
-        
         if let categoryTotal = categoryTotal {
             let total = categoryTotal.total
             totalExpensesLabel.text = ConvertToDollar.shared.toDollar(value: total)

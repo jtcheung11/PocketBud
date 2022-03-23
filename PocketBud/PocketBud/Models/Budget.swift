@@ -13,7 +13,6 @@ struct BudgetStrings {
     static let recordIDKey = "recordID"
     static let incomeKey = "income"
     static let totalKey = "total"
-    
 }
 
 class Budget {

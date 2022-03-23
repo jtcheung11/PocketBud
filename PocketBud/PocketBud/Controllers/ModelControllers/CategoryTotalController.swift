@@ -42,7 +42,6 @@ class CategoryTotalController {
             self.categoryTotals.insert(savedCategoryTotal, at: 0)
             completion(.success(savedCategoryTotal))
         }
-        
     }
     
     /**
@@ -51,7 +50,6 @@ class CategoryTotalController {
      - Parameter date: the date of teh fetched catagory totals
      
      */
-    
     func fetchCategoryTotals(date: Date, completion: @escaping(Bool)-> Void) {
         let components = Calendar.current.dateComponents([.month , .year], from: date)
         
@@ -135,7 +133,7 @@ class CategoryTotalController {
     func updatCategoryTotalWithNewExpenseCategory(oldCategory: String, newCategory: String, amount: Double, completion: @escaping (Bool) -> Void) {
         guard let oldCategoryTotal = categoryTotals.first(where: { $0.categoryName == oldCategory }) else { return completion(false) }
         let group = DispatchGroup()
-
+        
         group.enter()
         updateCategoryTotal(oldCategoryTotal, total: -amount) { success in
             if success {
@@ -144,7 +142,6 @@ class CategoryTotalController {
                 return completion(false)
             }
         }
-       
         group.enter()
         if let newCategoryTotal = categoryTotals.first(where: { $0.categoryName == newCategory }) {
             updateCategoryTotal(newCategoryTotal, total: amount) { success in
@@ -165,7 +162,6 @@ class CategoryTotalController {
                 }
             }
         }
-      
         group.notify(queue: .main) {
             return completion(true)
         }
@@ -192,7 +188,7 @@ class CategoryTotalController {
      
      */
     func updateBothCategoryTotals(oldCategory: String, newCategory: String, oldAmount: Double, newAmount: Double, completion: @escaping(Bool) -> Void) {
-    
+        
         guard let oldCategoryTotal = categoryTotals.first(where: { $0.categoryName == oldCategory }) else { return completion(false)}
         let group = DispatchGroup()
         group.enter()
@@ -203,7 +199,6 @@ class CategoryTotalController {
                 return completion(false)
             }
         }
-      
         group.enter()
         if let newCategoryTotal = categoryTotals.first(where: { $0.categoryName == newCategory }) {
             updateCategoryTotal(newCategoryTotal, total: newAmount) { success in
@@ -223,7 +218,6 @@ class CategoryTotalController {
                 }
             }
         }
-    
         group.notify(queue: .main) {
             return completion(true)
         }

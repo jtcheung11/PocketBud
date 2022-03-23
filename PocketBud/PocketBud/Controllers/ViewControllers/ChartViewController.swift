@@ -14,7 +14,6 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var currentMonthPieChart: PieChartView!
     @IBOutlet weak var monthLabel: UILabel!
     
-    
     //MARK: - Properties
     var budgetDate = Date()
     var chartColors: [UIColor] = [#colorLiteral(red: 1, green: 0.1491002738, blue: 0, alpha: 1), #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), #colorLiteral(red: 1, green: 0.173960674, blue: 0.587517369, alpha: 1), #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1), #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1), #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1), #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1), #colorLiteral(red: 0.8587893091, green: 0.6070529848, blue: 0.2928512582, alpha: 1), #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)]
@@ -78,12 +77,11 @@ class ChartViewController: UIViewController {
 class MyValueFormatter: ValueFormatter {
     func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
         return ConvertToDollar.shared.toDollar(value: value)
-//        return "$\(value)"
     }
 } //End of class
 
 extension ChartViewController: ChartViewDelegate {
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-//        currentMonthPieChart.
+        //        currentMonthPieChart.
     }
 }
